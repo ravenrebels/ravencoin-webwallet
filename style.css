@@ -1,0 +1,54 @@
+html,
+body {
+  min-height: 100vh;
+}
+@keyframes taadaa {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+:root {
+  /*  --primary: black; 
+   --h5-color: Cornsilk; 
+    --color: Cornsilk;
+    */
+  --font-family: "Quicksand", sans-serif !important;
+}
+#loading {
+  animation: taadaa 5s infinite;
+}
+h1 {
+  background: linear-gradient(hotpink, white);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+article {
+  /* From https://css.glass */
+  background: rgba(27, 26, 26, 0.8);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(27, 26, 26, 0.3);
+}
+body {
+  background: linear-gradient(
+    112.1deg,
+    rgb(32, 38, 57) 11.4%,
+    rgb(63, 76, 119) 70.2%
+  );
+}
+
+@font-face {
+  font-family: Quicksand;
+  src: url(Quicksand-VariableFont_wght.ttf);
+}

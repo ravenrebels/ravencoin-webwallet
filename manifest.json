@@ -1,0 +1,15 @@
+{
+  "name": "Rebel wallet",
+  "short_name": "Rebel Wallet",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "A Ravencoin walet.",
+  "icons": [
+    {
+      "src": "./ravencoin-rvn-logo.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ]
+}
