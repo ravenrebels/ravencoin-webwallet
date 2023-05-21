@@ -92,6 +92,7 @@ function App() {
       <div className="grid">
         <button onClick={signOut}>Sign out</button>
         <button
+          className="secondary"
           onClick={(event) => {
             const value = localStorage.getItem("mnemonic");
             if (value) {
@@ -105,6 +106,11 @@ function App() {
           Copy your secret 12 words to memory
         </button>
       </div>
+      <p>
+        <a href="https://github.com/ravenrebels/ravencoin-webwallet">
+          Open source on GitHub
+        </a>
+      </p>
     </>
   );
 }

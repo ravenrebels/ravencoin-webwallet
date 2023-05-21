@@ -2,8 +2,8 @@ import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 
 const imageStyle = {
-  maxWidth: "50px",
-  maxHeight: "50px",
+  maxWidth: "80px",
+  maxHeight: "80px",
   borderRadius: "10px",
   marginRight: "10px",
 
