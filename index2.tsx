@@ -11,6 +11,7 @@ import { Loader } from "./Loader";
 import { Send } from "./Send";
 import { Asset } from "./Types";
 import { Login } from "./Login";
+import { Sweep } from "./Sweep";
 
 let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
@@ -87,6 +88,7 @@ function App() {
       <Assets wallet={wallet} assets={assets} />
       <ReceiveAddress receiveAddress={receiveAddress} />
       <Send wallet={wallet} balance={balance} assets={assets} />
+      <Sweep wallet={wallet}/>
       <History wallet={wallet} />
 
       <div className="grid">
