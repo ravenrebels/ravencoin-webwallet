@@ -30,7 +30,9 @@ h1 {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
+article {
+  background: black;
+}
 article2 {
   /* From https://css.glass */
   background: rgba(27, 26, 26, 0.8);
