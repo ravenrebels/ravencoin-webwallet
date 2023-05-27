@@ -18,7 +18,7 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
       }
       console.log(asdf);
       const text = JSON.stringify(asdf.outputs, null, 4);
-      alert("SUCESS " + text);
+      alert("SUCCESS " + text);
     } catch (e) {
       alert("Something went wrong " + JSON.stringify(e, null, 4));
     }
