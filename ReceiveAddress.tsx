@@ -26,10 +26,11 @@ export function ReceiveAddress({ receiveAddress }: { receiveAddress: string }) {
           }
         />
         <small> {receiveAddress}</small>
-        {confirm === true && (
-          <button onClick={copy}>⎘ address copied to memory</button>
-        )}
+
       </label>
+      {confirm === true && (
+          <button onClick={copy}>😀</button>
+        )}
       {confirm === false && <button onClick={copy}>Copy</button>}
     </article>
   );
