@@ -41,7 +41,7 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
           ></input>
         </label>
 
-        <button onClick={sweep}>Sweep</button>
+        <button onClick={sweep} disabled={!privateKey}>Sweep</button>
       </form>
     </article>
   );
