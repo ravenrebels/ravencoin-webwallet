@@ -2,8 +2,17 @@
 Web wallet for Ravencoin!
 
 
-##
-Clone the repo
-`npm install` to install dependencies
-`npm run build` to build for production
-`npm run dev` for local development
+## How to build
+
+### Clone the repo
+`git clone https://github.com/ravenrebels/ravencoin-webwallet.git`
+
+###install dependencies
+`npm install` 
+
+
+### Start local dev server
+`npm run dev` 
+
+### build for production
+`npm run build` 
