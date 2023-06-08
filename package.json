@@ -17,25 +17,25 @@
     "@ravenrebels/ravencoin-key": "^2.5.0",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
-    "parcel": "^2.8.3",
+    "parcel": "^2.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-qr-reader": "^3.0.0-beta-1"
-  },
-  "devDependencies": {
-    "@parcel/packager-raw-url": "^2.8.3",
-    "@parcel/transformer-webmanifest": "^2.8.3",
-    "assert": "^2.0.0",
-    "buffer": "^5.7.1",
-    "crypto-browserify": "^3.12.0",
-    "events": "^3.3.0",
-    "process": "^0.11.10",
-    "stream-browserify": "^3.0.0"
   },
   "overrides": {
     "react-qr-reader": {
       "react": "$react",
       "react-dom": "$react-dom"
     }
+  },
+  "devDependencies": {
+    "@parcel/packager-raw-url": "^2.9.1",
+    "@parcel/transformer-webmanifest": "^2.9.1",
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "events": "^3.3.0",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0"
   }
 }
