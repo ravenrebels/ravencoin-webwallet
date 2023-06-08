@@ -7,12 +7,12 @@ Web wallet for Ravencoin!
 ### Clone the repo
 `git clone https://github.com/ravenrebels/ravencoin-webwallet.git`
 
-###install dependencies
+### Install dependencies
 `npm install` 
 
 
 ### Start local dev server
 `npm run dev` 
 
-### build for production
+### Build for production
 `npm run build` 
