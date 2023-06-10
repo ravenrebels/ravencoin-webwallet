@@ -35,7 +35,7 @@ function App() {
     }
     RavencoinWallet.createInstance({
       mnemonic,
-      network: "rvn-test",
+      network: "rvn",
     }).then(setWallet);
   }, [mnemonic]);
 
