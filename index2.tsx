@@ -35,7 +35,7 @@ function App() {
     }
     RavencoinWallet.createInstance({
       mnemonic,
-      network: "rvn",
+      network: "rvn-test",
     }).then(setWallet);
   }, [mnemonic]);
 
@@ -88,7 +88,7 @@ function App() {
       <Assets wallet={wallet} assets={assets} />
       <ReceiveAddress receiveAddress={receiveAddress} />
       <Send wallet={wallet} balance={balance} assets={assets} />
-      <Sweep wallet={wallet}/>
+      <Sweep wallet={wallet} />
       <History wallet={wallet} />
 
       <div className="grid">

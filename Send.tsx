@@ -15,47 +15,47 @@ export function Send({
   const [amount, setAmount] = React.useState("");
   const [asset, setAsset] = React.useState("-");
   const [showQRCode, setShowQRCode] = React.useState(false);
+  const [isBusy, setIsBusy] = React.useState(false);
   function onResult(to) {
     setTo(to);
     setShowQRCode(false);
   }
   const qr = useQRReader(showQRCode, onResult);
-  function onSubmit(event: React.SyntheticEvent) {
+  async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
 
+    setIsBusy(true);
     //Validate amount
     if (isNaN(parseFloat(amount)) === true) {
       alert(amount + " does not seem like a valid number");
       return;
     }
-    //Validate that to address is a valid address
-    wallet.rpc("validateaddress", [to]).then((result) => {
-      if (result.isvalid === true) {
-        //OK we are ready to send
-        const c = confirm(
-          "Do you want to send " + amount + " " + asset + " to " + to
-        );
-        if (c === true) {
-          const promise = wallet.send({
+    //Validate that "to address" is a valid address
+    const validateAddressResponse = await wallet.rpc("validateaddress", [to]);
+
+    if (validateAddressResponse.isvalid === false) {
+      alert(to + " does not seem to be a valid address");
+    } else {
+      //OK we are ready to send
+      const c = confirm(
+        "Do you want to send " + amount + " " + asset + " to " + to
+      );
+      if (c === true) {
+        try {
+          const result = await wallet.send({
             toAddress: to,
             assetName: asset,
             amount: parseFloat(amount),
           });
-
-          promise.then((result) => {
-            alert("Success");
-            setTo("");
-            setAmount("");
-            setAsset("");
-          });
-          promise.catch((e) => {
-            alert("" + e);
-          });
-        }
-      } else {
-        alert(to + " does not seem to be a valid address to send to");
+          console.log(result.transactionId);
+          alert("Success");
+          setTo("");
+          setAmount("");
+          setAsset("");
+        } catch (e) {}
       }
-    });
+    }
+    setIsBusy(false);
     return false;
   }
 
@@ -75,7 +75,11 @@ export function Send({
       <h5>Send / transfer / pay</h5>
       {qr}
       {showQRCode === false && (
-        <button style={{ maxWidth: 200 }} onClick={() => setShowQRCode(true)}>
+        <button
+          className="secondary"
+          style={{ maxWidth: 200 }}
+          onClick={() => setShowQRCode(true)}
+        >
           Scan QR code
         </button>
       )}
@@ -108,7 +112,9 @@ export function Send({
             type="text"
           />
         </label>
-        <button>Send</button>
+        <button disabled={isBusy} aria-busy={isBusy}>
+          Send
+        </button>
       </form>
     </article>
   );
@@ -134,6 +140,7 @@ function useQRReader(
             scanDelay={100}
             onResult={(result, error) => {
               if (!!result) {
+                //@ts-ignore
                 onResult(result?.text);
               }
 
