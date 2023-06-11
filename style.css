@@ -27,24 +27,41 @@ h1 {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-article {
-  background: black;
+
+/*
+  If dark mode, change article background color
+*/
+[data-theme="dark"] article {
+  background-color: black;
 }
-article2 {
-  /* From https://css.glass */
-  background: rgba(27, 26, 26, 0.8);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(27, 26, 26, 0.3);
-}
-body {
+/*
+  If dark mode, change body background color
+*/
+[data-theme="dark"] body {
   background: linear-gradient(
     112.1deg,
     rgb(32, 38, 57) 11.4%,
     rgb(63, 76, 119) 70.2%
   );
+}
+/*
+  If light mode, change body background color
+*/
+[data-theme="light"] body {
+  background: linear-gradient(
+    112.1deg,
+    rgb(255, 255, 255) 11.4%,
+    Whitesmoke 70.2%
+  );
+}
+/*
+  If light mode, change h1 color
+  */
+[data-theme="light"] h1 {
+  background: linear-gradient(darkred, orange);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @font-face {
