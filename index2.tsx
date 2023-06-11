@@ -42,6 +42,7 @@ function App() {
     }
     RavencoinWallet.createInstance({
       mnemonic,
+      minAmountOfAddresses: 50,
       network,
     }).then(setWallet);
   }, [mnemonic]);
@@ -72,7 +73,6 @@ function App() {
       wallet.getMempool().then(setMempool);
       wallet.getReceiveAddress().then(setReceiveAddress);
       wallet.getAssets().then(setAssets);
-
       wallet.getBalance().then(setBalance);
     }
   }, [blockCount]);

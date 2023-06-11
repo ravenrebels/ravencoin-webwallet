@@ -13,11 +13,11 @@
   "license": "MIT",
   "dependencies": {
     "@ravenrebels/ravencoin-history-list": "^1.2.1",
-    "@ravenrebels/ravencoin-jswallet": "^0.7.16",
+    "@ravenrebels/ravencoin-jswallet": "^0.7.20",
     "@ravenrebels/ravencoin-key": "^2.5.0",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
-    "parcel": "^2.9.1",
+    "parcel": "^2.9.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-qr-reader": "^3.0.0-beta-1"
@@ -29,8 +29,8 @@
     }
   },
   "devDependencies": {
-    "@parcel/packager-raw-url": "^2.9.1",
-    "@parcel/transformer-webmanifest": "^2.9.1",
+    "@parcel/packager-raw-url": "^2.9.2",
+    "@parcel/transformer-webmanifest": "^2.9.2",
     "assert": "^2.0.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
