@@ -8,7 +8,6 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
     event.preventDefault();
   };
   const sweep = async () => {
-    confirm("Do you want to sweep all stuff on " + privateKey);
     try {
       const onlineMode = true;
       const asdf = await wallet.sweep(privateKey, onlineMode);
@@ -19,6 +18,7 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
       console.log(asdf);
       const text = JSON.stringify(asdf.outputs, null, 4);
       alert("SUCCESS " + text);
+      document.getElementById("mempool")?.focus();
     } catch (e) {
       alert("Something went wrong " + JSON.stringify(e, null, 4));
     }
@@ -29,7 +29,7 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
       <p>Transfer the entire balance of a private key to your wallet</p>
       <form onSubmit={onSubmit}>
         <QRCameraContainer onChange={setPrivateKey} />
-        <label style={{marginTop: "calc(var(--spacing) * 2)"}}>
+        <label style={{ marginTop: "calc(var(--spacing) * 2)" }}>
           Private Key (not address)
           <input
             type="text"
@@ -42,7 +42,9 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
           ></input>
         </label>
 
-        <button onClick={sweep} disabled={!privateKey}>Sweep</button>
+        <button onClick={sweep} disabled={!privateKey}>
+          Sweep
+        </button>
       </form>
     </article>
   );

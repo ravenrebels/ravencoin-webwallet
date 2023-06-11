@@ -12,7 +12,7 @@ export function Mempool({ mempool }: IMempoolProps) {
   if (history.length > 0) {
     console.log(mempool);
     return (
-      <article>
+      <article id="mempool" tabIndex={0}>
         <ul>
           {history.map((item, index: number) => {
             const asset = item.assets[0];
@@ -29,5 +29,5 @@ export function Mempool({ mempool }: IMempoolProps) {
       </article>
     );
   }
-  return null;
+  return <span id="mempool" tabIndex={0} />;
 }

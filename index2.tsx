@@ -16,6 +16,7 @@ import { Sweep } from "./Sweep";
 let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
 
+type ChainType = "rvn" | "rvn-test";
 function App() {
   const [mempool, setMempool] = React.useState<any>([]);
   const [receiveAddress, setReceiveAddress] = React.useState("");
@@ -30,12 +31,18 @@ function App() {
 
   //At startup init wallet
   React.useEffect(() => {
+    //Override network to rvn-test if present in query string (search)
+    const searchParams = new URLSearchParams(window.location.search);
+    let network: ChainType = "rvn";
+    if (searchParams.get("network") === "rvn-test") {
+      network = "rvn-test";
+    }
     if (!mnemonic) {
       return;
     }
     RavencoinWallet.createInstance({
       mnemonic,
-      network: "rvn",
+      network,
     }).then(setWallet);
   }, [mnemonic]);
 

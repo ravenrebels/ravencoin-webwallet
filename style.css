@@ -15,11 +15,8 @@ body {
 }
 
 :root {
-  /*  --primary: black; 
-   --h5-color: Cornsilk; 
-    --color: Cornsilk;
-    */
   --font-family: "Quicksand", sans-serif !important;
+  /*  --font-family: "intel-one-mono"; */
 }
 #loading {
   animation: taadaa 5s infinite;
@@ -53,4 +50,10 @@ body {
 @font-face {
   font-family: Quicksand;
   src: url(Quicksand-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: intel-one-mono;
+  src: url("intel-one-mono/intelone-mono-font-family-medium.woff")
+    format("woff");
 }
