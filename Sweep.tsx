@@ -27,8 +27,9 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
     <article>
       <h5>Sweep (experimental)</h5>
       <p>Transfer the entire balance of a private key to your wallet</p>
+      <QRCameraContainer onChange={setPrivateKey} />
       <form onSubmit={onSubmit}>
-        <QRCameraContainer onChange={setPrivateKey} />
+        
         <label style={{ marginTop: "calc(var(--spacing) * 2)" }}>
           Private Key (not address)
           <input
