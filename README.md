@@ -20,3 +20,9 @@ Now you can test it locally on your computer, it starts with HTTPS to be able to
 `npm run build` 
 
 Now the ./dist folder contains the web "site", you can FTP the files to your web server.
+
+
+### Experimental features
+To use TESTNET instead of MAINNET for Ravencoin, append `?network=rvn-test` to the URL. 
+
+Note: asset thumbnails only work on mainnet.
