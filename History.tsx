@@ -65,7 +65,7 @@ export function History({ wallet }) {
         <table>
           <thead>
             <tr>
-              <th>Block height</th>
+              <th>Date</th>
               <th>Asset</th>
               <th>Amount</th>
             </tr>
