@@ -4,7 +4,7 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#fff",
-  "description": "A Ravencoin walet.",
+  "description": "A Ravencoin wallet.",
   "icons": [
     {
       "src": "./ravencoin-rvn-logo.png",

@@ -12,7 +12,7 @@ const imageStyle = {
 export function Assets({ wallet, assets }) {
   return (
     <article>
-      <h5>Assets</h5>
+      <h5>Assets / Tokens</h5>
       <table>
         <thead>
           <tr>

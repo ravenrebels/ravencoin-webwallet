@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build index.html",
     "watch": "parcel watch index.html",
+    "start": "parcel index.html",
     "dev": "parcel index.html --https"
   },
   "keywords": [],

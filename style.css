@@ -21,11 +21,13 @@ body {
 #loading {
   animation: taadaa 5s infinite;
 }
-h1 {
+.rebel-headline {
   background: linear-gradient(hotpink, white);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /*
@@ -53,8 +55,8 @@ h1 {
 /*
   If light mode, change h1 color
   */
-[data-theme="light"] h1 {
-  background: linear-gradient(darkred, orange);
+[data-theme="light"] .rebel-headline {
+  background: linear-gradient(black, hotpink);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -69,4 +71,29 @@ h1 {
   font-family: intel-one-mono;
   src: url("intel-one-mono/intelone-mono-font-family-medium.woff")
     format("woff");
+}
+
+.light-mode-toggle{
+  float: right;
+  position: relative;
+  zoom: 0.7;
+}
+.rebel-.headline{
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+ 
+
+.rebel-light-mode__toggle-form{
+  margin-bottom: 0;
+}
+
+.rebel-light-mode__toggle-form-label{
+  margin-bottom: 0;
+}
+.rebel-nav__item--active{
+  background: var(--muted-border-color);
+}
+.rebel-navigator{
+  margin-top: 0;
 }

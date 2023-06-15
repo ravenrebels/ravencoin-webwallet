@@ -12,12 +12,15 @@ import { Send } from "./Send";
 import { Asset } from "./Types";
 import { Login } from "./Login";
 import { Sweep } from "./Sweep";
+import { Navigator } from "./Navigator";
+import { Routes } from "./Routes";
 
 let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
 
 type ChainType = "rvn" | "rvn-test";
 function App() {
+  const [currentRoute, setCurrentRoute] = React.useState(Routes.HOME);
   const [mempool, setMempool] = React.useState<any>([]);
   const [receiveAddress, setReceiveAddress] = React.useState("");
   const [mnemonic, setMnemonic] = React.useState(
@@ -90,13 +93,30 @@ function App() {
   };
   return (
     <>
-      <Balance balance={balance} />
+      <Navigator
+        currentRoute={currentRoute}
+        setRoute={setCurrentRoute}
+        wallet={wallet}
+      />
+      {currentRoute === Routes.HOME && (
+        <Balance balance={balance} wallet={wallet} />
+      )}
       <Mempool mempool={mempool} />
-      <Assets wallet={wallet} assets={assets} />
-      <ReceiveAddress receiveAddress={receiveAddress} />
-      <Send wallet={wallet} balance={balance} assets={assets} />
-      <Sweep wallet={wallet} />
-      <History wallet={wallet} />
+
+      {currentRoute === Routes.HOME && (
+        <Assets wallet={wallet} assets={assets} />
+      )}
+      {currentRoute === Routes.RECEIVE && (
+        <ReceiveAddress receiveAddress={receiveAddress} />
+      )}
+
+      {currentRoute === Routes.SEND && (
+        <Send wallet={wallet} balance={balance} assets={assets} />
+      )}
+
+      {currentRoute === Routes.SWEEP && <Sweep wallet={wallet} />}
+
+      {currentRoute === Routes.HISTORY && <History wallet={wallet} />}
 
       <div className="grid">
         <button onClick={signOut}>Sign out</button>

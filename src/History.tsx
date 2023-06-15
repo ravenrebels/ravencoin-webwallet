@@ -34,10 +34,12 @@ export function History({ wallet }) {
   const [history, setHistory] = React.useState<any>([]);
   const [isOpen, setIsOpen] = React.useState(false);
 
+  React.useEffect(() => {
+    wallet.getHistory().then(setHistory);
+  }, []);
   const items = getHistory(history);
   const listItems = items.map((item: any, index: number) => {
-
-    if(index > 40){
+    if (index > 40) {
       return null;
     }
     return (
@@ -52,27 +54,16 @@ export function History({ wallet }) {
   });
   return (
     <article>
-      <details
-        onToggle={(event) => {
-          //@ts-ignore
-          if (event.target?.open) {
-            /* the element was toggled open */
-            wallet.getHistory().then(setHistory);
-          }
-        }}
-      >
-        <summary>History - last 40 transactions</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Asset</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>{listItems}</tbody>
-        </table>
-      </details>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Asset</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>{listItems}</tbody>
+      </table>
     </article>
   );
 }

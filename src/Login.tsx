@@ -44,7 +44,7 @@ export function Login() {
   return (
     <article>
       {dialog}
-      <h1>Wallet - sign in</h1>
+      <h1 className="rebel-headline">Wallet - sign in</h1>
       <p>
         This web app only saves your 12 words in memory and the words are lost
         when you sign out or the web browser cache is cleared.
