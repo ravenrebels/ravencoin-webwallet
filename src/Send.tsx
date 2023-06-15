@@ -52,7 +52,10 @@ export function Send({
           setTo("");
           setAmount("");
           setAsset("");
-        } catch (e) {}
+        } catch (e) {
+
+          alert("" + e);
+        }
       }
     }
     setIsBusy(false);

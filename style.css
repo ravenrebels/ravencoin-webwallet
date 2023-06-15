@@ -73,27 +73,28 @@ body {
     format("woff");
 }
 
-.light-mode-toggle{
+.light-mode-toggle {
   float: right;
   position: relative;
   zoom: 0.7;
+  top: 25px;
 }
-.rebel-.headline{
+.rebel-.headline {
   margin-bottom: 0;
   padding-bottom: 0;
 }
- 
 
-.rebel-light-mode__toggle-form{
+.rebel-light-mode__toggle-form {
+  margin-bottom: 0;
+}
+.rebel-light-mode__toggle-form-label {
   margin-bottom: 0;
 }
 
-.rebel-light-mode__toggle-form-label{
-  margin-bottom: 0;
+.rebel-navigator-list__item {
+  padding-bottom: 2px !important;
 }
-.rebel-nav__item--active{
-  background: var(--muted-border-color);
-}
-.rebel-navigator{
-  margin-top: 0;
+
+.rebel-navigator-list__item--active a {
+  --background-color: var(    --muted-border-color) !important;
 }

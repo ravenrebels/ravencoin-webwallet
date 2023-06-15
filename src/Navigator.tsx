@@ -18,27 +18,22 @@ export function Navigator({
   const networkDisplayName = mappy[wallet.network];
 
   return (
-    <article className="rebel-navigator">
-      <small>{networkDisplayName}</small>
+    <article>
       <LightModeToggle />
-      <nav>
-        <ul>
-          <li>
-            <a
-              href="#"
-              className="primary"
-              onClick={(event) => {
-                setRoute(Routes.HOME);
-                event.preventDefault();
-                return false;
-              }}
-            >
-              <h1 className="rebel-headline">Rebel wallet</h1>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <nav>
+      <a
+        href="#"
+        className="primary"
+        onClick={(event) => {
+          setRoute(Routes.HOME);
+          event.preventDefault();
+          return false;
+        }}
+      >
+        <h1 className="rebel-headline">Rebel wallet</h1>
+      </a>
+      <small>{networkDisplayName}</small>
+
+      <nav className="rebel-navigator">
         <ul>
           <Link
             currentRoute={currentRoute}
@@ -84,17 +79,21 @@ interface ILinkProps {
   title: string;
 }
 function Link({ currentRoute, newRoute, setRoute, title }: ILinkProps) {
-  const classes = "secondary " + (currentRoute === newRoute ? "rebel-nav__item--active" : "");
+  const isCurrent = currentRoute === newRoute;
+  const classes =
+    "rebel-navigator-list__item" +
+    (isCurrent ? " rebel-navigator-list__item--active" : "");
   return (
-    <li>
+    <li className={classes}>
       <a
         href="#"
-        className={classes}
+        className="secondary"
         onClick={(event) => {
           setRoute(newRoute);
           event.preventDefault();
           return false;
         }}
+        style={{ display: "block" }}
       >
         {title}
       </a>
