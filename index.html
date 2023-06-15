@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="">
   <head>
     <link rel="manifest" href="./manifest.json" />
     <meta
@@ -15,6 +15,27 @@
     <link rel="stylesheet" href="./pico.min.css" />
     <title>Rebel wallet - Ravencoin</title>
     <link rel="stylesheet" href="./style.css" />
+
+    <script>
+      // Check if the user prefers dark mode
+      function isDarkModePreferred() {
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+    //Set data-theme attribute of HTML element, for PICO CSS
+      if (isDarkModePreferred()) {
+        document.querySelector("html").setAttribute("data-theme", "dark");
+      } else {
+        document.querySelector("html").setAttribute("data-theme", "light");
+      }
+    </script>
   </head>
   <body>
     <main class="container">

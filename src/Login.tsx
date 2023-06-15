@@ -1,5 +1,6 @@
 import React from "react";
 import RavencoinKey from "@ravenrebels/ravencoin-key";
+import { LightModeToggle } from "./LightModeToggle";
 
 export function Login() {
   const [showWords, setShowWords] = React.useState(false);
@@ -43,6 +44,7 @@ export function Login() {
 
   return (
     <article>
+      <LightModeToggle/>
       {dialog}
       <h1 className="rebel-headline">Wallet - sign in</h1>
       <p>
