@@ -12,12 +12,17 @@ export function Login() {
     setDialog(d);
   }
   function newWallet(event) {
+    event.preventDefault();
     const element = document.getElementById("mnemonic") as HTMLInputElement;
+    if (element?.value) {
+      alert("Please clear the input field before creating a new wallet");
+      return false;
+    }
     if (element) {
       element.value = RavencoinKey.generateMnemonic();
     }
-    showDialog("WARNING", "Make sure you save these 12 worlds somewhere safe");
-    event.preventDefault();
+    showDialog("WARNING", "Make sure you save these 12 words somewhere safe. Next, click Sign in");
+
     return false;
   }
   function onSubmit(event) {
@@ -44,7 +49,7 @@ export function Login() {
 
   return (
     <article>
-      <LightModeToggle/>
+      <LightModeToggle />
       {dialog}
       <h1 className="rebel-headline">Wallet - sign in</h1>
       <p>
@@ -73,11 +78,15 @@ export function Login() {
 
         <div className="grid" style={{ marginTop: 40 }}>
           <input type="submit" value="Sign in" />{" "}
-          <button id="newWalletButton" onClick={newWallet}>
+          <button
+            id="newWalletButton"
+            onClick={newWallet}
+            className="secondary"
+          >
             Create a new wallet
           </button>
         </div>
-      </form>{" "}
+      </form>
     </article>
   );
 }
