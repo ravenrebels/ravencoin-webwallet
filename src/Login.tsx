@@ -48,8 +48,7 @@ export function Login() {
       <p>
         This web app only saves your 12 words in memory and the words are lost
         when you sign out or the web browser cache is cleared.
-        <br /> For real, keep your 12 words saved/backuped somewhere
-        safe
+        <br /> For real, keep your 12 words saved/backuped somewhere safe
       </p>
       <h5>Enter your 12 words</h5>
       <form onSubmit={onSubmit}>
@@ -95,15 +94,13 @@ function Dialog({
     <dialog open>
       <article>
         <header>
-          <a
-            href="#close"
-            aria-label="Close"
-            className="close"
-            onClick={onClose}
-          ></a>
+          <a aria-label="Close" className="close" onClick={onClose}></a>
           {title}
         </header>
         <p>{text}</p>
+        <footer>
+          <button onClick={onClose}>Close</button>
+        </footer>
       </article>
     </dialog>
   );
