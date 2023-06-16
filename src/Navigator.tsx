@@ -34,7 +34,7 @@ export function Navigator({
       <small>{networkDisplayName}</small>
       <hr></hr>
       <nav className="rebel-navigator">
-        <ul>
+        <ul className="rebel-navigator__list">
           <Link
             currentRoute={currentRoute}
             setRoute={setRoute}
@@ -81,8 +81,8 @@ interface ILinkProps {
 function Link({ currentRoute, newRoute, setRoute, title }: ILinkProps) {
   const isCurrent = currentRoute === newRoute;
   const classes =
-    "rebel-navigator-list__item" +
-    (isCurrent ? " rebel-navigator-list__item--active" : "");
+    "rebel-navigator__list-item" +
+    (isCurrent ? " rebel-navigator__list-item--active" : "");
   return (
     <li className={classes}>
       <a
