@@ -93,6 +93,7 @@ body {
 
 .rebel-navigator-list__item {
   padding-bottom: 2px !important;
+  text-align: center;
 }
 
 .rebel-navigator-list__item--active a {
