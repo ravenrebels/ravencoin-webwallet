@@ -87,7 +87,7 @@ function Link({ currentRoute, newRoute, setRoute, title }: ILinkProps) {
     <li className={classes}>
       <a
         href="#"
-        className="secondary"
+        className="primary"
         onClick={(event) => {
           setRoute(newRoute);
           event.preventDefault();
