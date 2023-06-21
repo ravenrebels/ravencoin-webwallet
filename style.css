@@ -66,12 +66,12 @@ body {
   font-family: Quicksand;
   src: url(Quicksand-VariableFont_wght.ttf);
 }
-
+/*
 @font-face {
   font-family: intel-one-mono;
   src: url("intel-one-mono/intelone-mono-font-family-medium.woff")
     format("woff");
-}
+}*/
 
 .light-mode-toggle {
   float: right;
@@ -101,4 +101,14 @@ body {
 
 .rebel-navigator__list-item--active a {
   --background-color: var(--muted-border-color) !important;
+}
+
+/*
+  Navigator links in LIGHT and DARK mode
+*/
+[data-theme="light"] .rebel-navigator__list-item-link {
+  color: black;
+}
+[data-theme="dark"] .rebel-navigator__list-item-link {
+  color: white;
 }

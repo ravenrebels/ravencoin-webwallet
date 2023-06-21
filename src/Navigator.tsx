@@ -87,7 +87,7 @@ function Link({ currentRoute, newRoute, setRoute, title }: ILinkProps) {
     <li className={classes}>
       <a
         href="#"
-        className="primary"
+        className="primary rebel-navigator__list-item-link"
         onClick={(event) => {
           setRoute(newRoute);
           event.preventDefault();
