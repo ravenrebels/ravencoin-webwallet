@@ -87,8 +87,10 @@ function App() {
   }
 
   const signOut = () => {
-    localStorage.removeItem("mnemonic");
-    window.location.reload();
+    if (confirm("Are you sure you want to sign out?")) {
+      localStorage.removeItem("mnemonic");
+      window.location.reload();
+    }
   };
   return (
     <>
