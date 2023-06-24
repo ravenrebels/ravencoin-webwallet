@@ -42,10 +42,17 @@ export function History({ wallet }) {
     if (index > 40) {
       return null;
     }
+
+    const URL = "https://rvn.cryptoscope.io/tx/?txid=" + item.transactionId;
     return (
       <tr key={item.transactionId}>
         <td>
-          <BlockTime blockHeight={item.blockHeight} wallet={wallet}></BlockTime>
+          <a href={URL} target="_blank">
+            <BlockTime
+              blockHeight={item.blockHeight}
+              wallet={wallet}
+            ></BlockTime>
+          </a>
         </td>
         <td>{item.assets[0].assetName}</td>
         <td>{item.assets[0].value}</td>
