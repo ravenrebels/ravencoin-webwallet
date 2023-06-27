@@ -14,6 +14,7 @@ import { Login } from "./Login";
 import { Sweep } from "./Sweep";
 import { Navigator } from "./Navigator";
 import { Routes } from "./Routes";
+import { Footer } from "./Footer";
 
 let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
@@ -119,31 +120,7 @@ function App() {
 
       {currentRoute === Routes.HISTORY && <History wallet={wallet} />}
 
-      <div className="grid">
-        <button onClick={signOut}>Sign out</button>
-        <button
-          className="secondary"
-          onClick={(event) => {
-            const value = localStorage.getItem("mnemonic");
-            if (value) {
-              const target = event.target as HTMLButtonElement;
-              navigator.clipboard.writeText(value);
-              target.disabled = true;
-              setInterval(() => (target.disabled = false), 2000);
-            }
-          }}
-        >
-          Copy your secret 12 words to memory
-        </button>
-      </div>
-      <p>
-        <a href="https://github.com/ravenrebels/ravencoin-webwallet">
-          Open source on GitHub
-        </a>
-        <br />
-        Icons from{" "}
-        <a href="https://feathericons.com/">https://feathericons.com/</a>
-      </p>
+      <Footer signOut={signOut} />
     </>
   );
 }

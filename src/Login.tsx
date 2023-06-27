@@ -21,7 +21,10 @@ export function Login() {
     if (element) {
       element.value = RavencoinKey.generateMnemonic();
     }
-    showDialog("WARNING", "Make sure you save these 12 words somewhere safe. Next, click Sign in");
+    showDialog(
+      "WARNING",
+      "Make sure you save these 12 words somewhere safe. Next, click Sign in"
+    );
 
     return false;
   }
@@ -51,11 +54,11 @@ export function Login() {
     <article>
       <LightModeToggle />
       {dialog}
-      <h1 className="rebel-headline">Wallet - sign in</h1>
+      <h1 className="rebel-headline">Sign in</h1>
       <p>
         This web app only saves your 12 words in memory and the words are lost
         when you sign out or the web browser cache is cleared.
-        <br /> For real, keep your 12 words saved/backuped somewhere safe
+        <br /> For real, keep your 12 words saved/backuped somewhere safe.
       </p>
       <h5>Enter your 12 words</h5>
       <form onSubmit={onSubmit}>

@@ -12,8 +12,14 @@ Web wallet for Ravencoin!
 
 
 ### Start local dev server
-`npm run dev` 
-Now you can test it locally on your computer, it starts with HTTPS to be able to use Camera for QR Code scanning.
+
+`npm start`<br/>
+Starts a local development server using HTTP, does not support QR code scanning.<br/>
+http://localhost:1234
+
+`npm run dev` <br/>
+Starts a local development server using HTTPS, supports QR code scanning.<br/>
+https://localhost:1234
 
 
 ### Build for production
