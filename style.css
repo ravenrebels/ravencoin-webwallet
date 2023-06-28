@@ -28,6 +28,10 @@ body {
   -webkit-text-fill-color: transparent;
   margin-bottom: 10px;
   padding-bottom: 0;
+
+  white-space: nowrap;
+
+  
 }
 
 /*
@@ -78,10 +82,6 @@ body {
   position: relative;
   zoom: 0.8;
   top: 25px;
-}
-.rebel-.headline {
-  margin-bottom: 0;
-  padding-bottom: 0;
 }
 
 .rebel-light-mode__toggle-form {
