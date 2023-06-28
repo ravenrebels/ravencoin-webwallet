@@ -20,7 +20,7 @@ export function ReceiveAddress({ receiveAddress }: { receiveAddress: string }) {
           }}
           src={
             receiveAddress
-              ? "https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=" +
+              ? "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
                 receiveAddress
               : ""
           }
