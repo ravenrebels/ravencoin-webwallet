@@ -12,8 +12,8 @@ export function LightModeToggle() {
   };
   return (
     <div className="light-mode-toggle">
-      <form  className="rebel-light-mode__toggle-form">
-        <label  className="rebel-light-mode__toggle-form-label">
+      <form className="rebel-light-mode__toggle-form">
+        <label className="rebel-light-mode__toggle-form-label">
           <input
             type="checkbox"
             role="switch"
@@ -26,4 +26,3 @@ export function LightModeToggle() {
     </div>
   );
 }
- 
