@@ -27,10 +27,8 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 10px;
-  padding-bottom: 0; 
+  padding-bottom: 0;
   white-space: nowrap;
-
-  
 }
 
 /*
@@ -43,17 +41,21 @@ body {
   If dark mode, change body background color
 */
 [data-theme="dark"] body {
+  /*
   background: linear-gradient(
     112.1deg,
     rgb(32, 38, 57) 11.4%,
     rgb(63, 76, 119) 70.2%
   );
+  */
+  background: linear-gradient(112.1deg, #2e3e80.4%, #f15b22 70.2%);
 }
 /*
   If light mode, change body background color
 */
 [data-theme="light"] body {
-  background: linear-gradient(112.1deg, WhiteSmoke 11.4%, MintCream 70.2%);
+  /*  background: linear-gradient(112.1deg, WhiteSmoke 11.4%, MintCream 70.2%); */
+  background: linear-gradient(112.1deg, #2e3e80.4%, #f15b22 70.2%);
 }
 /*
   If light mode, change h1 color
