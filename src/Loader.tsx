@@ -5,7 +5,7 @@ export function Loader() {
   return (
     <main className="container">
       <article id="loading">
-        <h1 className="rebel-headline">Ravencoin wallet</h1>
+        <h3 className="rebel-headline">Rebel wallet</h3>
         <img src={logo}></img>
       </article>
     </main>
