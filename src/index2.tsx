@@ -1,5 +1,6 @@
 import RavencoinWallet, { Wallet } from "@ravenrebels/ravencoin-jswallet";
 import React from "react";
+import { getMnemonic } from "./utils";
 import { createRoot } from "react-dom/client";
 
 import { History } from "./History";
@@ -20,13 +21,13 @@ let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
 
 type ChainType = "rvn" | "rvn-test";
+
+const initMnemonic = getMnemonic();
 function App() {
   const [currentRoute, setCurrentRoute] = React.useState(Routes.HOME);
   const [mempool, setMempool] = React.useState<any>([]);
   const [receiveAddress, setReceiveAddress] = React.useState("");
-  const [mnemonic, setMnemonic] = React.useState(
-    localStorage.getItem("mnemonic")
-  );
+  const [mnemonic, setMnemonic] = React.useState(initMnemonic);
 
   const [assets, setAssets] = React.useState<Asset[]>([]);
   const [balance, setBalance] = React.useState(0);

@@ -1,7 +1,8 @@
 import React from "react";
+
 import RavencoinKey from "@ravenrebels/ravencoin-key";
 import { LightModeToggle } from "./LightModeToggle";
-
+import { getMnemonic, setMnemonic } from "./utils";
 export function Login() {
   const [showWords, setShowWords] = React.useState(false);
   const [dialog, setDialog] = React.useState(<></>);
@@ -43,7 +44,7 @@ export function Login() {
       alert("The does not seem to be 12 valid words for a Ravencoin wallet");
       return;
     } else {
-      localStorage.setItem("mnemonic", value);
+      setMnemonic(value);
       window.location.reload();
     }
 
