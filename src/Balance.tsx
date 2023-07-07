@@ -12,8 +12,8 @@ export function Balance({
  
   return (
     <article> 
-      <h5>{wallet.baseCurrency} balance</h5>
-      <p>{balance.toLocaleString()} RVN</p>
+      <strong>{wallet.baseCurrency} balance</strong>
+      <h1 style={{paddingBottom: 0, marginBottom: 0}}>{balance.toLocaleString()}</h1>
     </article>
   );
 }
