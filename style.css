@@ -13,11 +13,11 @@ body {
     opacity: 1;
   }
 }
-
+/*
 :root {
-  --font-family: "Quicksand", sans-serif !important;
-  /*  --font-family: "intel-one-mono"; */
+  --font-family2: "Quicksand", sans-serif !important; 
 }
+*/
 #loading {
   animation: taadaa 5s infinite;
 }
@@ -81,7 +81,7 @@ body {
 .light-mode-toggle {
   float: right;
   position: relative;
-  zoom: 0.7;
+  zoom: 0.8;
   top: 25px;
 }
 
