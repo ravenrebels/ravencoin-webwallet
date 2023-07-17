@@ -1,4 +1,5 @@
 import RavencoinWallet, { Wallet } from "@ravenrebels/ravencoin-jswallet";
+console.log("RavencoinWallet", RavencoinWallet);
 import React from "react";
 import { getMnemonic } from "./utils";
 import { createRoot } from "react-dom/client";
