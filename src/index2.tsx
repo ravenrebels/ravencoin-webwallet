@@ -104,7 +104,7 @@ function App() {
       {currentRoute === Routes.HOME && (
         <Balance balance={balance} mempool={mempool} wallet={wallet} />
       )}
-      <Mempool mempool={mempool} />
+      <Mempool mempool={mempool} wallet={wallet} />
 
       {currentRoute === Routes.HOME && (
         <Assets wallet={wallet} assets={assets} />
