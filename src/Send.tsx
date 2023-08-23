@@ -53,7 +53,7 @@ export function Send({
           setAmount("");
           setAsset("");
         } catch (e) {
-
+          console.error(e);
           alert("" + e);
         }
       }
