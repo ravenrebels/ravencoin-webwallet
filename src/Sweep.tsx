@@ -21,6 +21,7 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
       alert("SUCCESS " + text);
       document.getElementById("mempool")?.focus();
     } catch (e) {
+      console.log("SWEEP error", e);
       alert("Something went wrong " + JSON.stringify(e, null, 4));
     }
   };
