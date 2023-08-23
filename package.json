@@ -9,7 +9,10 @@
     "start": "parcel index.html",
     "dev": "parcel index.html --https"
   },
-  "keywords": [],
+  "keywords": [
+    "Ravencoin",
+    "RVN"
+  ],
   "author": "Raven Rebels / Dick Henrik Larsson",
   "license": "MIT",
   "dependencies": {
