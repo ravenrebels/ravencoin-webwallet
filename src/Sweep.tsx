@@ -11,6 +11,7 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
     try {
       const onlineMode = true;
       const asdf = await wallet.sweep(privateKey, onlineMode);
+      console.log("SWEEP RESULT", asdf);
       if (asdf.errorDescription) {
         alert(asdf.errorDescription);
         return;
@@ -29,7 +30,6 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
       <p>Transfer the entire balance of a private key to your wallet</p>
       <QRCameraContainer onChange={setPrivateKey} />
       <form onSubmit={onSubmit}>
-        
         <label style={{ marginTop: "calc(var(--spacing) * 2)" }}>
           Private Key (not address)
           <input
