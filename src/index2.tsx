@@ -122,7 +122,7 @@ function App() {
 
       {currentRoute === Routes.HISTORY && <History wallet={wallet} />}
 
-      <Footer signOut={signOut} />
+      <Footer signOut={signOut} mnemonic={mnemonic} />
     </>
   );
 }

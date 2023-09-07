@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Footer({ signOut }) {
+export function Footer({ signOut, mnemonic }) {
   return (
     <article>
       <p>
@@ -21,13 +21,10 @@ export function Footer({ signOut }) {
           <button
             className="secondary"
             onClick={(event) => {
-              const value = localStorage.getItem("mnemonic");
-              if (value) {
-                const target = event.target as HTMLButtonElement;
-                navigator.clipboard.writeText(value);
-                target.disabled = true;
-                setInterval(() => (target.disabled = false), 2000);
-              }
+              const target = event.target as HTMLButtonElement;
+              navigator.clipboard.writeText(mnemonic);
+              target.disabled = true;
+              setInterval(() => (target.disabled = false), 2000);
             }}
           >
             Copy your secret 12 words to memory
