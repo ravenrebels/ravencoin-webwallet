@@ -1,5 +1,5 @@
 import RavencoinWallet, { Wallet } from "@ravenrebels/ravencoin-jswallet";
-console.log("RavencoinWallet", RavencoinWallet);
+
 import React from "react";
 import { getMnemonic } from "./utils";
 import { createRoot } from "react-dom/client";
@@ -37,16 +37,20 @@ function App() {
 
   //At startup init wallet
   React.useEffect(() => {
+    if (!mnemonic) {
+      return;
+    }
+
     //Override network to rvn-test if present in query string (search)
     const searchParams = new URLSearchParams(window.location.search);
     let network: ChainType = "rvn";
     if (searchParams.get("network") === "rvn-test") {
       network = "rvn-test";
     }
-    if (!mnemonic) {
-      return;
-    }
+
+    const start = new Date();
     RavencoinWallet.createInstance({
+      minAmountOfAddresses: 50,
       mnemonic,
       network,
     }).then(setWallet);
@@ -54,22 +58,29 @@ function App() {
 
   //When wallet changes (like has been created) setup interval for fetching block count
   React.useEffect(() => {
+    if (!wallet) {
+      return;
+    }
     async function fetchBlockCount() {
-      if (!wallet) {
-        return;
+      const b = await wallet?.rpc("getblockcount", []);
+      if (b !== blockCount) {
+        setBlockCount(b);
+      } else {
       }
-
-      const b = await wallet.rpc("getblockcount", []);
-      setBlockCount(b);
     }
     fetchBlockCount();
-    //Fetch updates every 5 seconds
-    setInterval(fetchBlockCount, 5 * 1000);
+    //Fetch updates every 15 seconds
+    const blockInterval = setInterval(fetchBlockCount, 15 * 1000);
 
     //Fetch mempool every 10 seconds
-    setInterval(() => {
-      wallet?.getMempool().then(setMempool);
+    const mempoolInterval = setInterval(() => {
+      wallet.getMempool().then(setMempool);
     }, 10 * 1000);
+
+    return function cleanUp() {
+      clearInterval(blockInterval);
+      clearInterval(mempoolInterval);
+    };
   }, [wallet]);
 
   //Fetch data on each block update

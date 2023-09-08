@@ -1,7 +1,7 @@
 import React from "react";
 
 import RavencoinKey from "@ravenrebels/ravencoin-key";
-console.log("RavencoinKey", RavencoinKey);
+
 import { LightModeToggle } from "./LightModeToggle";
 import { getMnemonic, setMnemonic } from "./utils";
 export function Login() {

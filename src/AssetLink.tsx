@@ -36,7 +36,7 @@ export function AssetLink({ wallet, assetName }: LinkToIPFSProps) {
       </div>
     );
   }
-  console.log("Asset data", assetData);
+
   if (assetData && assetData.ipfs_hash) {
     const url = "https://cloudflare-ipfs.com/ipfs/" + assetData.ipfs_hash;
     const imageURL =
