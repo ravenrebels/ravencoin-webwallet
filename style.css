@@ -13,9 +13,21 @@ body {
     opacity: 1;
   }
 }
+body {
+  /*
+  background: linear-gradient(
+    112.1deg,
+    rgb(32, 38, 57) 11.4%,
+    rgb(63, 76, 119) 70.2%
+  );
+  */
+  /* background: linear-gradient(112.1deg, #2e3e80.4%, #f15b22 70.2%); */
+  background-color: #000;
+  background-image: linear-gradient(147deg, #923cb5 0%, #000000 74%);
+}
 /*
 :root {
-  --font-family2: "Quicksand", sans-serif !important; 
+  --font-family: "Quicksand", sans-serif !important;
 }
 */
 #loading {
@@ -26,8 +38,7 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 10px;
-  padding-bottom: 0;
+
   white-space: nowrap;
 }
 
@@ -37,26 +48,7 @@ body {
 [data-theme="dark"] article {
   background-color: black;
 }
-/*
-  If dark mode, change body background color
-*/
-[data-theme="dark"] body {
-  /*
-  background: linear-gradient(
-    112.1deg,
-    rgb(32, 38, 57) 11.4%,
-    rgb(63, 76, 119) 70.2%
-  );
-  */
-  background: linear-gradient(112.1deg, #2e3e80.4%, #f15b22 70.2%);
-}
-/*
-  If light mode, change body background color
-*/
-[data-theme="light"] body {
-  /*  background: linear-gradient(112.1deg, WhiteSmoke 11.4%, MintCream 70.2%); */
-  background: linear-gradient(112.1deg, #2e3e80.4%, #f15b22 70.2%);
-}
+
 /*
   If light mode, change h1 color
   */
@@ -82,7 +74,6 @@ body {
   float: right;
   position: relative;
   zoom: 0.8;
-  top: 25px;
 }
 
 .rebel-light-mode__toggle-form {
@@ -94,9 +85,11 @@ body {
 .rebel-navigator__list {
   display: flex;
   justify-content: space-between;
+  list-style: none;
   width: 100%;
 }
 .rebel-navigator__list-item {
+  list-style: none;
   text-align: center;
 }
 

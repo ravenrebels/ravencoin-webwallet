@@ -1,12 +1,14 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Routes } from "./Routes";
 import { LightModeToggle } from "./LightModeToggle";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 export function Navigator({
+  balance,
   wallet,
   currentRoute,
   setRoute,
 }: {
+  balance: ReactNode;
   currentRoute: Routes;
   wallet: Wallet;
   setRoute: any;
@@ -18,7 +20,7 @@ export function Navigator({
   const networkDisplayName = mappy[wallet.network];
 
   return (
-    <article>
+    <article className="rebel-navigator__container">
       <LightModeToggle />
       <a
         href="#"
@@ -29,10 +31,11 @@ export function Navigator({
           return false;
         }}
       >
-        <h1 className="rebel-headline">Rebel wallet</h1>
+        <h3 className="rebel-headline">Rebel wallet</h3>
       </a>
-      <small>{networkDisplayName}</small>
-      <hr></hr>
+
+      {balance}
+
       <nav className="rebel-navigator">
         <ul className="rebel-navigator__list">
           <Link
@@ -68,6 +71,10 @@ export function Navigator({
           />
         </ul>
       </nav>
+
+      <small>
+        <i>{networkDisplayName}</i>
+      </small>
     </article>
   );
 }

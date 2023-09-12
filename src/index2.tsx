@@ -109,13 +109,14 @@ function App() {
   return (
     <>
       <Navigator
+        balance={
+          <Balance balance={balance} mempool={mempool} wallet={wallet} />
+        }
         currentRoute={currentRoute}
         setRoute={setCurrentRoute}
         wallet={wallet}
       />
-      {currentRoute === Routes.HOME && (
-        <Balance balance={balance} mempool={mempool} wallet={wallet} />
-      )}
+
       <Mempool mempool={mempool} wallet={wallet} />
 
       {currentRoute === Routes.HOME && (

@@ -8,7 +8,7 @@ export function Login() {
   const [showWords, setShowWords] = React.useState(false);
   const [dialog, setDialog] = React.useState(<></>);
 
-  function showDialog(title, text) {
+  function showDialog(title: string, text: string) {
     const onClose = () => setDialog(<></>);
     const d = <Dialog title={title} text={text} onClose={onClose}></Dialog>;
     setDialog(d);

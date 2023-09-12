@@ -11,19 +11,22 @@ export function Balance({
   balance: number;
   mempool: any;
 }) {
-  let hasPending: boolean = false;
+  let hasPending = mempool.length > 0;
   let pending = 0;
   mempool.map((item: any) => {
-    hasPending = true;
     if (item.assetName === wallet.baseCurrency) {
       pending = pending + item.satoshis / 1e8;
     }
   });
 
   const _balance = balance + pending;
+
+  const balanceText = _balance.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
   return (
-    <article>
-      <strong>{wallet.baseCurrency} balance</strong>
+    <div>
       {hasPending === true ? (
         <div>
           <small>* includes pending transactions</small>
@@ -31,9 +34,9 @@ export function Balance({
       ) : (
         ""
       )}
-      <h1 style={{ paddingBottom: 0, marginBottom: 0 }}>
-        {_balance.toLocaleString()}
-      </h1>
-    </article>
+      <h3 style={{ textAlign: "center" }}>
+        {balanceText} {wallet.baseCurrency}
+      </h3>
+    </div>
   );
 }
