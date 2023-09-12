@@ -34,9 +34,9 @@ export function Balance({
       ) : (
         ""
       )}
-      <h3 style={{ textAlign: "center" }}>
+      <h1 style={{ textAlign: "center" }}>
         {balanceText} {wallet.baseCurrency}
-      </h3>
+      </h1>
     </div>
   );
 }
