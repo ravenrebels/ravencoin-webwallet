@@ -97,6 +97,10 @@ body {
   --background-color: var(--muted-border-color) !important;
 }
 
+.rebel-navigator__list-item-link {
+  font-weight: 100;
+}
+
 /*
   Navigator links in LIGHT and DARK mode
 */
@@ -105,4 +109,12 @@ body {
 }
 [data-theme="dark"] .rebel-navigator__list-item-link {
   color: white;
+}
+.rebel-balance {
+  font-weight: 100;
+  text-align: center;
+}
+.rebel-balance__dollar-value {
+  font-weight: 100;
+  font-size: 40%;
 }

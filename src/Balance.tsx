@@ -19,8 +19,13 @@ export function Balance({
     }
   });
 
+  const price = useUSDPrice();
   const _balance = balance + pending;
 
+  const dollarValue = (price * _balance).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
   const balanceText = _balance.toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -34,9 +39,33 @@ export function Balance({
       ) : (
         ""
       )}
-      <h1 style={{ textAlign: "center" }}>
+      <h1 className="rebel-balance">
         {balanceText} {wallet.baseCurrency}
+        <div className="rebel-balance__dollar-value">{dollarValue}</div>
       </h1>
     </div>
   );
+}
+
+function useUSDPrice() {
+  const [price, setPrice] = React.useState(0);
+
+  React.useEffect(() => {
+    const work = () => {
+      const URL = "https://api1.binance.com/api/v3/ticker/price?symbol=RVNUSDT";
+      fetch(URL)
+        .then((response) => response.json())
+        .then((obj) => {
+          setPrice(parseFloat(obj.price));
+        });
+    };
+    const interval = setInterval(work, 60 * 1000);
+    work();
+
+    return function cleanUp() {
+      clearInterval(interval);
+    };
+  }, []);
+
+  return price;
 }
