@@ -1,5 +1,6 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
+import { getAssetBalanceFromMempool } from "./utils";
 
 const imageStyle = {
   maxWidth: "80px",
@@ -9,7 +10,7 @@ const imageStyle = {
 
   background: "white",
 };
-export function Assets({ wallet, assets }) {
+export function Assets({ wallet, assets, mempool }) {
   return (
     <article>
       <h5>Assets / Tokens</h5>
@@ -22,16 +23,17 @@ export function Assets({ wallet, assets }) {
         </thead>
         <tbody>
           {assets.map((asset: any) => {
-            if (asset.balance === 0) {
+            const pending = getAssetBalanceFromMempool(asset.assetName, mempool);
+            if (asset.balance === 0 && pending === 0) {
               return null;
             }
-            const amount = asset.balance / 1e8;
+            const amount = (asset.balance / 1e8) + pending;
             return (
-              <tr key={asset.assetName}>
-                <td>
+              <tr key={asset.assetName} >
+                <td >
                   <LinkToIPFS wallet={wallet} assetName={asset.assetName} />
                 </td>
-                <td>{amount.toLocaleString()}</td>
+                <td aria-busy={pending !== 0}>{amount.toLocaleString()}</td>
               </tr>
             );
           })}

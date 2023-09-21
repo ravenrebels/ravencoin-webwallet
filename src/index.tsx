@@ -48,7 +48,6 @@ function App() {
       network = "rvn-test";
     }
 
-    const start = new Date();
     RavencoinWallet.createInstance({
       minAmountOfAddresses: 50,
       mnemonic,
@@ -73,8 +72,10 @@ function App() {
     const blockInterval = setInterval(fetchBlockCount, 15 * 1000);
 
     //Fetch mempool every 10 seconds
-    const mempoolInterval = setInterval(() => {
-      wallet.getMempool().then(setMempool);
+    const mempoolInterval = setInterval(async () => {
+      const promise = wallet.getMempool();
+      const m = await promise; 
+      setMempool(m);
     }, 10 * 1000);
 
     return function cleanUp() {
@@ -92,7 +93,8 @@ function App() {
       wallet.getBalance().then(setBalance);
     }
   }, [blockCount]);
-
+ 
+ 
   if (!mnemonic) {
     return <Login />;
   }
@@ -120,14 +122,14 @@ function App() {
       <Mempool mempool={mempool} wallet={wallet} />
 
       {currentRoute === Routes.HOME && (
-        <Assets wallet={wallet} assets={assets} />
+        <Assets wallet={wallet} assets={assets} mempool={mempool}/>
       )}
       {currentRoute === Routes.RECEIVE && (
         <ReceiveAddress receiveAddress={receiveAddress} />
       )}
 
       {currentRoute === Routes.SEND && (
-        <Send wallet={wallet} balance={balance} assets={assets} />
+        <Send assets={assets} balance={balance} mempool={mempool} wallet={wallet}   />
       )}
 
       {currentRoute === Routes.SWEEP && <Sweep wallet={wallet} />}

@@ -16,7 +16,7 @@ export function getMnemonic(): string {
   }
 
   const decryptedBytes = CryptoJS.AES.decrypt(raw, S);
-  const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8); 
+  const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8);
   return decryptedText;
 }
 
@@ -39,4 +39,20 @@ export function setMnemonic(_value: string) {
 
     localStorage.setItem("mnemonic", cipherText);
   }
+}
+export function getAssetBalanceFromMempool(assetName: string, mempool: any) {
+  if (!mempool) {
+    return 0;
+  }
+  if (mempool.length === 0) {
+    return 0;
+  }
+
+  let pending = 0;
+  mempool.map((item: any) => {
+    if (item.assetName === assetName) {
+      pending = pending + item.satoshis / 1e8;
+    }
+  });
+  return pending;
 }

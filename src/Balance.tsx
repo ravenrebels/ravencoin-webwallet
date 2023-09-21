@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
+import { getAssetBalanceFromMempool } from "./utils";
 
 export function Balance({
   balance,
@@ -11,14 +12,8 @@ export function Balance({
   balance: number;
   mempool: any;
 }) {
-  let hasPending = mempool.length > 0;
-  let pending = 0;
-  mempool.map((item: any) => {
-    if (item.assetName === wallet.baseCurrency) {
-      pending = pending + item.satoshis / 1e8;
-    }
-  });
-
+  let pending = getAssetBalanceFromMempool(wallet.baseCurrency, mempool);
+  const hasPending = pending !== 0;
   const price = useUSDPrice();
   const _balance = balance + pending;
 
