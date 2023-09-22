@@ -82,6 +82,19 @@ body {
 .rebel-light-mode__toggle-form-label {
   margin-bottom: 0;
 }
+
+.rebel-navigator{
+  zoom: 0.8;
+}
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (min-width: 576px) {
+  .rebel-navigator{
+    zoom: 1.1;
+  }
+}
+.rebel-navigator__container{
+  padding-bottom: 30px;
+}
 .rebel-navigator__list {
   display: flex;
   justify-content: space-between;
@@ -98,7 +111,7 @@ body {
 }
 
 .rebel-navigator__list-item-link {
-  font-weight: 200;
+  font-weight: 300;
 }
 
 /*
@@ -111,10 +124,10 @@ body {
   color: white;
 }
 .rebel-balance {
-  font-weight: 100;
+  font-weight: 200;
   text-align: center;
 }
 .rebel-balance__dollar-value {
-  font-weight: 100;
+  font-weight: 200;
   font-size: 70%;
 }

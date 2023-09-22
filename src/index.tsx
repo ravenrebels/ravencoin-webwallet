@@ -11,7 +11,7 @@ import { ReceiveAddress } from "./ReceiveAddress";
 import { Balance } from "./Balance";
 import { Loader } from "./Loader";
 import { Send } from "./Send";
-import { Asset } from "./Types";
+import { IAsset } from "./Types";
 import { Login } from "./Login";
 import { Sweep } from "./Sweep";
 import { Navigator } from "./Navigator";
@@ -31,7 +31,7 @@ function App() {
   const [receiveAddress, setReceiveAddress] = React.useState("");
   const [mnemonic, setMnemonic] = React.useState(initMnemonic);
 
-  const [assets, setAssets] = React.useState<Asset[]>([]);
+  const [assets, setAssets] = React.useState<IAsset[]>([]);
   const [balance, setBalance] = React.useState(0);
   const [blockCount, setBlockCount] = React.useState(0);
   const [wallet, setWallet] = React.useState<null | Wallet>(null);

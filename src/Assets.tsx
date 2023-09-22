@@ -1,13 +1,16 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
-import { getAssetBalanceFromMempool, getAssetBalanceIncludingMempool } from "./utils";
+import {
+  getAssetBalanceFromMempool,
+  getAssetBalanceIncludingMempool,
+} from "./utils";
 
 const imageStyle = {
   maxWidth: "80px",
   maxHeight: "80px",
   borderRadius: "10px",
   marginRight: "10px",
-
+  marginBottom: "5px",
   background: "white",
 };
 interface IAsset {
@@ -20,7 +23,7 @@ export function Assets({ wallet, assets, mempool }) {
   return (
     <article>
       <h5>Assets / Tokens</h5>
-      <table>
+      <table role="grid">
         <thead>
           <tr>
             <th>Name</th>
@@ -33,13 +36,16 @@ export function Assets({ wallet, assets, mempool }) {
             if (balance === 0) {
               return null;
             }
-
+            const tdStyle = {
+              paddingBottom: 20,
+              paddingTop: 20,
+            };
             return (
               <tr key={assetName}>
-                <td style={{ paddingBottom: 20, paddingTop: 20 }}>
+                <td style={tdStyle}>
                   <LinkToIPFS wallet={wallet} assetName={assetName} />
                 </td>
-                <td>{balance.toLocaleString()}</td>
+                <td style={tdStyle}>{balance.toLocaleString()}</td>
               </tr>
             );
           })}
@@ -72,7 +78,11 @@ function LinkToIPFS({ wallet, assetName }: LinkToIPFSProps) {
       encodeURIComponent(assetName);
     return (
       <div>
-        <a href={url} target="asset">
+        <a
+          href={url}
+          target="asset"
+          style={{ textDecoration: "none", color: "var(--pico-contrast)" }}
+        >
           <img
             src={imageURL}
             style={imageStyle}
@@ -98,8 +108,11 @@ function LinkToIPFS({ wallet, assetName }: LinkToIPFSProps) {
 }
 
 function AssetName({ name }) {
+  const style = {
+    paddingTop: 10,
+  };
   if (name.indexOf("/") === -1) {
-    return <div>{name}</div>;
+    return <div style={style}>{name}</div>;
   }
 
   if (name.indexOf("/") > -1) {
@@ -107,8 +120,7 @@ function AssetName({ name }) {
     const result: React.JSX.Element[] = [];
     for (let s of splitty) {
       const index = splitty.indexOf(s);
-
-      const isLast = splitty.indexOf(s) === splitty.length - 1;
+      const isLast = index === splitty.length - 1;
 
       if (isLast === false) {
         result.push(<span>{s}/</span>);
@@ -118,6 +130,6 @@ function AssetName({ name }) {
       }
     }
 
-    return <div>{result}</div>;
+    return <div style={style}>{result}</div>;
   }
 }
