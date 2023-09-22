@@ -131,3 +131,8 @@ body {
   font-weight: 200;
   font-size: 70%;
 }
+
+
+#newWalletButton{
+  margin-bottom: var(--pico-spacing);
+}
