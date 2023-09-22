@@ -17,6 +17,7 @@ import { Sweep } from "./Sweep";
 import { Navigator } from "./Navigator";
 import { Routes } from "./Routes";
 import { Footer } from "./Footer";
+import { Sign } from "./sign/Sign";
 
 let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
@@ -74,7 +75,7 @@ function App() {
     //Fetch mempool every 10 seconds
     const mempoolInterval = setInterval(async () => {
       const promise = wallet.getMempool();
-      const m = await promise; 
+      const m = await promise;
       setMempool(m);
     }, 10 * 1000);
 
@@ -93,8 +94,7 @@ function App() {
       wallet.getBalance().then(setBalance);
     }
   }, [blockCount]);
- 
- 
+
   if (!mnemonic) {
     return <Login />;
   }
@@ -122,19 +122,26 @@ function App() {
       <Mempool mempool={mempool} wallet={wallet} />
 
       {currentRoute === Routes.HOME && (
-        <Assets wallet={wallet} assets={assets} mempool={mempool}/>
+        <Assets wallet={wallet} assets={assets} mempool={mempool} />
       )}
       {currentRoute === Routes.RECEIVE && (
         <ReceiveAddress receiveAddress={receiveAddress} />
       )}
 
       {currentRoute === Routes.SEND && (
-        <Send assets={assets} balance={balance} mempool={mempool} wallet={wallet}   />
+        <Send
+          assets={assets}
+          balance={balance}
+          mempool={mempool}
+          wallet={wallet}
+        />
       )}
 
       {currentRoute === Routes.SWEEP && <Sweep wallet={wallet} />}
 
       {currentRoute === Routes.HISTORY && <History wallet={wallet} />}
+
+      {currentRoute === Routes.SIGN && <Sign assets={assets} wallet={wallet}/>}
 
       <Footer signOut={signOut} mnemonic={mnemonic} />
     </>

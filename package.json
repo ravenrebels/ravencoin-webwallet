@@ -19,6 +19,7 @@
     "@ravenrebels/ravencoin-history-list": "^1.2.1",
     "@ravenrebels/ravencoin-jswallet": "^0.7.36",
     "@ravenrebels/ravencoin-key": "^2.5.2",
+    "@ravenrebels/ravencoin-message": "^0.7.0",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "crypto-js": "^4.1.1",

@@ -3,5 +3,6 @@ export enum Routes {
   HOME = "home",
   RECEIVE = "receive",
   SEND = "send",
+  SIGN ="sign",
   SWEEP = "sweep",
 }
