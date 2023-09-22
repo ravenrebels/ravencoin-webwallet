@@ -23,14 +23,17 @@ export function Assets({ wallet, assets, mempool }) {
         </thead>
         <tbody>
           {assets.map((asset: any) => {
-            const pending = getAssetBalanceFromMempool(asset.assetName, mempool);
+            const pending = getAssetBalanceFromMempool(
+              asset.assetName,
+              mempool
+            );
             if (asset.balance === 0 && pending === 0) {
               return null;
             }
-            const amount = (asset.balance / 1e8) + pending;
+            const amount = asset.balance / 1e8 + pending;
             return (
-              <tr key={asset.assetName} >
-                <td >
+              <tr key={asset.assetName}>
+                <td style={{ paddingBottom: 20, paddingTop: 20 }}>
                   <LinkToIPFS wallet={wallet} assetName={asset.assetName} />
                 </td>
                 <td aria-busy={pending !== 0}>{amount.toLocaleString()}</td>
@@ -75,7 +78,7 @@ function LinkToIPFS({ wallet, assetName }: LinkToIPFSProps) {
               target.style.display = "none";
             }}
           ></img>
-          {assetName}
+          <AssetName name={assetName} />
         </a>
       </div>
     );
@@ -86,7 +89,32 @@ function LinkToIPFS({ wallet, assetName }: LinkToIPFSProps) {
         style={imageStyle}
         src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png"
       ></img>
-      {assetName}
+      <AssetName name={assetName} />
     </span>
   );
+}
+
+function AssetName({ name }) {
+  if (name.indexOf("/") === -1 ) {
+    return <div>{name}</div>;
+  }
+
+  if (name.indexOf("/") > -1) {
+    const splitty = name.split("/");
+    const result: React.JSX.Element[] = [];
+    for (let s of splitty) {
+      const index = splitty.indexOf(s);
+      console.log(index, s, name);
+      const isLast = splitty.indexOf(s) === splitty.length - 1;
+      console.log("is last", isLast, s);
+      if (isLast === false) {
+        result.push(<span>{s}/</span>);
+        result.push(<wbr></wbr>);
+      } else {
+        result.push(<span>{s}</span>);
+      }
+    }
+    console.log("Return", result);
+    return <div>{result}</div>;
+  }
 }
