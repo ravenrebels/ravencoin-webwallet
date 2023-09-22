@@ -1,7 +1,6 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
-import {
-  getAssetBalanceFromMempool,
+import { 
   getAssetBalanceIncludingMempool,
 } from "./utils";
 

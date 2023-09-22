@@ -45,7 +45,7 @@ export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
           <option>-</option>
           {uniqueAssets &&
             uniqueAssets.map((asset) => {
-              return <option key={asset.assetName}>{asset.assetName}</option>;
+              return <option key={asset.assetName} selected={asset.assetName === selectedAsset}>{asset.assetName}</option>;
             })}
         </select>
       </label>
