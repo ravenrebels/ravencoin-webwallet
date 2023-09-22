@@ -1,15 +1,15 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
-import { Asset } from "./Types";
+import { IAsset } from "./Types";
 import { QrReader } from "react-qr-reader";
-import { getAssetBalanceFromMempool } from "./utils";
+import { getAssetBalanceFromMempool, getAssetBalanceIncludingMempool } from "./utils";
 export function Send({
   assets,
   balance,
   mempool,
   wallet,
 }: {
-  assets: Asset[];
+  assets: IAsset[];
   balance: number;
   mempool:any;
   wallet: Wallet;
@@ -65,13 +65,18 @@ export function Send({
     return false;
   }
 
-  const options = assets.map((asset) => {
-    if (asset.balance > 0) {
-      const pending = getAssetBalanceFromMempool(asset.assetName, mempool);
-      const balance = ((asset.balance / 1e8) + pending).toLocaleString();
+  const allAssets = getAssetBalanceIncludingMempool(assets, mempool);
+  const options = Object.keys(allAssets).map((assetName:string) => {
+    const balance = allAssets[assetName]
+    if (balance > 0) {
+      
+      const balanceDisplay =balance.toLocaleString();
+      if(balanceDisplay === "0"){
+        return null;
+      }
       return (
-        <option key={asset.assetName} value={asset.assetName}>
-          {asset.assetName} - ({balance})
+        <option key={assetName} value={assetName}>
+          {assetName} - ({balance})
         </option>
       );
     }

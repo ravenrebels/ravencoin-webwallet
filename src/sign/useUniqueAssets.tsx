@@ -1,12 +1,12 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
-import { Asset } from "../Types";
+import { IAsset } from "../Types";
 
-export function useUniqueAssets(wallet: Wallet, assets: Asset[]) {
-  const [uniqueAssets, setUniqueAssets] = React.useState<Asset[] | null>(null);
+export function useUniqueAssets(wallet: Wallet, assets: IAsset[]) {
+  const [uniqueAssets, setUniqueAssets] = React.useState<IAsset[] | null>(null);
 
   const work = () => {
-    const tempAssets: Asset[] = [];
+    const tempAssets: IAsset[] = [];
     for (let asset of assets) {
       //If asset balance is not exactly one it is obviously not an unique asset
       //Note asset.balance is in satoshis so 100 million is one, so multiply by 1e8

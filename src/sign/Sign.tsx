@@ -1,11 +1,11 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
-import { Asset } from "../Types";
+import { IAsset } from "../Types";
 import { CopyButton } from "./CopyButton";
 import { useUniqueAssets } from "./useUniqueAssets";
 import { useSignature } from "./useSignature";
 import { useAddressObject } from "./useAddressObject";
-export function Sign({ assets, wallet }: { assets: Asset[]; wallet: Wallet }) {
+export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
   const [text, setText] = React.useState("");
   const [selectedAsset, setSelectedAsset] = React.useState<string>("");
 

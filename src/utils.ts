@@ -1,3 +1,5 @@
+import { IAsset } from "./Types";
+
 const CryptoJS = require("crypto-js");
 
 const S = "U2FsdGVkX1/UYDOP/PD64YU3tbCAeJBR";
@@ -39,6 +41,29 @@ export function setMnemonic(_value: string) {
 
     localStorage.setItem("mnemonic", cipherText);
   }
+}
+export function getAssetBalanceIncludingMempool(
+  assets: IAsset[],
+  mempool: any
+) {
+  const allAssets: { [key: string]: number } = {}; //Object with assets from blockchain and from mempool
+  //Add assets from blockchain
+  assets.map(
+    (asset: IAsset) => (allAssets[asset.assetName] = asset.balance / 1e8)
+  );
+
+  //Add assets from mempool
+  mempool.map((m: IAsset) => {
+    const hasAsset = allAssets.hasOwnProperty(m.assetName);
+
+    if (hasAsset === false) {
+      allAssets[m.assetName] = 0;
+    }
+    const pending = getAssetBalanceFromMempool(m.assetName, mempool);
+    allAssets[m.assetName] += pending;
+  });
+
+  return allAssets;
 }
 export function getAssetBalanceFromMempool(assetName: string, mempool: any) {
   if (!mempool) {

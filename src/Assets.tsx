@@ -1,6 +1,6 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
-import { getAssetBalanceFromMempool } from "./utils";
+import { getAssetBalanceFromMempool, getAssetBalanceIncludingMempool } from "./utils";
 
 const imageStyle = {
   maxWidth: "80px",
@@ -10,7 +10,13 @@ const imageStyle = {
 
   background: "white",
 };
+interface IAsset {
+  assetName: string;
+  balance: number;
+}
 export function Assets({ wallet, assets, mempool }) {
+  const allAssets = getAssetBalanceIncludingMempool(assets, mempool);
+
   return (
     <article>
       <h5>Assets / Tokens</h5>
@@ -22,21 +28,18 @@ export function Assets({ wallet, assets, mempool }) {
           </tr>
         </thead>
         <tbody>
-          {assets.map((asset: any) => {
-            const pending = getAssetBalanceFromMempool(
-              asset.assetName,
-              mempool
-            );
-            if (asset.balance === 0 && pending === 0) {
+          {Object.keys(allAssets).map((assetName: string) => {
+            const balance = allAssets[assetName];
+            if (balance === 0) {
               return null;
             }
-            const amount = asset.balance / 1e8 + pending;
+
             return (
-              <tr key={asset.assetName}>
+              <tr key={assetName}>
                 <td style={{ paddingBottom: 20, paddingTop: 20 }}>
-                  <LinkToIPFS wallet={wallet} assetName={asset.assetName} />
+                  <LinkToIPFS wallet={wallet} assetName={assetName} />
                 </td>
-                <td aria-busy={pending !== 0}>{amount.toLocaleString()}</td>
+                <td>{balance.toLocaleString()}</td>
               </tr>
             );
           })}
@@ -95,7 +98,7 @@ function LinkToIPFS({ wallet, assetName }: LinkToIPFSProps) {
 }
 
 function AssetName({ name }) {
-  if (name.indexOf("/") === -1 ) {
+  if (name.indexOf("/") === -1) {
     return <div>{name}</div>;
   }
 
@@ -104,9 +107,9 @@ function AssetName({ name }) {
     const result: React.JSX.Element[] = [];
     for (let s of splitty) {
       const index = splitty.indexOf(s);
-      console.log(index, s, name);
+
       const isLast = splitty.indexOf(s) === splitty.length - 1;
-      console.log("is last", isLast, s);
+
       if (isLast === false) {
         result.push(<span>{s}/</span>);
         result.push(<wbr></wbr>);
@@ -114,7 +117,7 @@ function AssetName({ name }) {
         result.push(<span>{s}</span>);
       }
     }
-    console.log("Return", result);
+
     return <div>{result}</div>;
   }
 }
