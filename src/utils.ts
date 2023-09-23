@@ -81,3 +81,6 @@ export function getAssetBalanceFromMempool(assetName: string, mempool: any) {
   });
   return pending;
 }
+
+
+export const WALLET_ADDRESS = "- Wallet address (first address in wallet)";

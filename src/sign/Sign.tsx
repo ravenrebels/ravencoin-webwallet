@@ -59,7 +59,9 @@ export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
       </label>
       <CopyButton value={selectedAsset}  title="Copy asset name"/>
       <hr />
-
+      <label>Address <input disabled value={addressObject && addressObject.address}></input></label>
+      <CopyButton value={addressObject && addressObject.address}  title="Copy address"/>
+      <hr/>
       <label>
         Message to sign{" "}
         <textarea
