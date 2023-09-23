@@ -5,6 +5,7 @@ import { CopyButton } from "./CopyButton";
 import { useUniqueAssets } from "./useUniqueAssets";
 import { useSignature } from "./useSignature";
 import { useAddressObject } from "./useAddressObject";
+import { CopyIcon } from "../icons";
 export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
   const [text, setText] = React.useState("");
   const [selectedAsset, setSelectedAsset] = React.useState<string>("");
@@ -25,8 +26,8 @@ export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
       <article>
         <h5>Sign</h5>
         <p>
-          You do not have any unique assets.<br/> You need a unique asset to sign
-          messages
+          You do not have any unique assets.
+          <br /> You need a unique asset to sign messages
         </p>
       </article>
     );
@@ -45,11 +46,18 @@ export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
           <option>-</option>
           {uniqueAssets &&
             uniqueAssets.map((asset) => {
-              return <option key={asset.assetName} selected={asset.assetName === selectedAsset}>{asset.assetName}</option>;
+              return (
+                <option
+                  key={asset.assetName}
+                  selected={asset.assetName === selectedAsset}
+                >
+                  {asset.assetName}
+                </option>
+              );
             })}
         </select>
       </label>
-      <CopyButton value={selectedAsset} />
+      <CopyButton value={selectedAsset}  title="Copy asset name"/>
       <hr />
 
       <label>
@@ -63,14 +71,19 @@ export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
           {text}
         </textarea>
       </label>
-      <CopyButton value={text} />
+      <CopyButton value={text} title="Copy message"/>
       <hr />
       <label>
         Signature
         <textarea value={signature}></textarea>
       </label>
-      <CopyButton value={signature} />
+
+      <button
+        style={{ zoom: 0.7 }}
+        onClick={(event) => navigator.clipboard.writeText(signature)}
+      >
+        <CopyIcon />&nbsp;&nbsp;Copy signature
+      </button>
     </article>
   );
 }
-
