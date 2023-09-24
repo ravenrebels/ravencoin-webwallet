@@ -83,16 +83,16 @@ body {
   margin-bottom: 0;
 }
 
-.rebel-navigator{
+.rebel-navigator {
   zoom: 0.8;
 }
 /* On screens that are 600px or less, set the background color to olive */
 @media screen and (min-width: 576px) {
-  .rebel-navigator{
+  .rebel-navigator {
     zoom: 1.1;
   }
 }
-.rebel-navigator__container{
+.rebel-navigator__container {
   padding-bottom: 30px;
 }
 .rebel-navigator__list {
@@ -132,7 +132,18 @@ body {
   font-size: 70%;
 }
 
-
-#newWalletButton{
+#newWalletButton {
   margin-bottom: var(--pico-spacing);
+}
+
+#mempool {
+  padding: 5px;
+  zoom: 0.8;
+}
+
+/** Override PICOs huge font size **/
+@media (width >= 1280px) {
+  :root {
+    --pico-font-size: 100%;
+  }
 }
