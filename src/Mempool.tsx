@@ -2,6 +2,7 @@ import React from "react";
 import { getHistory, IDelta } from "@ravenrebels/ravencoin-history-list";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 import { AssetLink } from "./AssetLink";
+import { AssetName } from "./AssetName";
 export interface IMempoolProps {
   mempool: IDelta[];
   wallet: Wallet;
@@ -31,7 +32,7 @@ export function Mempool({ mempool, wallet }: IMempoolProps) {
                 >
                   <div>
                     {item.isSent === true ? "sending" : "receiving"}{" "}
-                    {amount.toLocaleString()} {name}
+                    {amount.toLocaleString()} <AssetName name={name}/>
                   </div>
 
                   <div>

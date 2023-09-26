@@ -1,5 +1,6 @@
 import React from "react";
 import { getHistory } from "@ravenrebels/ravencoin-history-list";
+import { AssetName } from "./AssetName";
 
 //Keep a map/list of block by block height
 const heightToBlock = new Map();
@@ -54,7 +55,9 @@ export function History({ wallet }) {
             ></BlockTime>
           </a>
         </td>
-        <td>{item.assets[0].assetName}</td>
+        <td>
+          <AssetName name={item.assets[0].assetName} />
+        </td>
         <td>{item.assets[0].value}</td>
       </tr>
     );
