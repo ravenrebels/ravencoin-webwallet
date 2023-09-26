@@ -108,6 +108,8 @@ function App() {
       window.location.reload();
     }
   };
+
+  const hasMempool = mempool.length > 0;
   return (
     <>
       <Navigator
@@ -119,29 +121,39 @@ function App() {
         wallet={wallet}
       />
 
-      <Mempool mempool={mempool} wallet={wallet} />
+      <div className="rebel-content-container">
+        {hasMempool && (
+          <div className="rebel-content-container__mempool">
+            <Mempool mempool={mempool} wallet={wallet} />
+          </div>
+        )}
 
-      {currentRoute === Routes.HOME && (
-        <Assets wallet={wallet} assets={assets} mempool={mempool} />
-      )}
-      {currentRoute === Routes.RECEIVE && (
-        <ReceiveAddress receiveAddress={receiveAddress} />
-      )}
+        <div className="rebel-content-container__content">
+          {currentRoute === Routes.HOME && (
+            <Assets wallet={wallet} assets={assets} mempool={mempool} />
+          )}
+          {currentRoute === Routes.RECEIVE && (
+            <ReceiveAddress receiveAddress={receiveAddress} />
+          )}
 
-      {currentRoute === Routes.SEND && (
-        <Send
-          assets={assets}
-          balance={balance}
-          mempool={mempool}
-          wallet={wallet}
-        />
-      )}
+          {currentRoute === Routes.SEND && (
+            <Send
+              assets={assets}
+              balance={balance}
+              mempool={mempool}
+              wallet={wallet}
+            />
+          )}
 
-      {currentRoute === Routes.SWEEP && <Sweep wallet={wallet} />}
+          {currentRoute === Routes.SWEEP && <Sweep wallet={wallet} />}
 
-      {currentRoute === Routes.HISTORY && <History wallet={wallet} />}
+          {currentRoute === Routes.HISTORY && <History wallet={wallet} />}
 
-      {currentRoute === Routes.SIGN && <Sign assets={assets} wallet={wallet}/>}
+          {currentRoute === Routes.SIGN && (
+            <Sign assets={assets} wallet={wallet} />
+          )}
+        </div>
+      </div>
 
       <Footer signOut={signOut} mnemonic={mnemonic} />
     </>

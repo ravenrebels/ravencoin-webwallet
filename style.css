@@ -136,14 +136,42 @@ body {
   margin-bottom: var(--pico-spacing);
 }
 
-#mempool {
-  padding: 5px;
-  zoom: 0.8;
-}
-
 /** Override PICOs huge font size **/
 @media (width >= 1280px) {
   :root {
     --pico-font-size: 100%;
+  }
+}
+
+#mempool {
+  padding: 10px;
+  font-size: 80%;
+}
+/*
+
+  When we have transfers in progress/Mempool info
+  On mobile we want to show that above the content (content can be SEND, RECEIVE or any other view)
+  On desktop we want to show the mempool info to the right of the content
+*/
+.rebel-content-container {
+  display: flex;
+  flex-direction: column; /* Default: Two columns side by side on desktop */
+}
+
+.rebel-content-container__mempool,
+.rebel-content-container__content {
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .rebel-content-container {
+    flex-direction: row; /* On mobile, switch to a single column layout */
+  }
+  #mempool {
+    margin-left: 10px;
+  }
+  /* Order the RightColumn to come before LeftColumn */
+  .rebel-content-container__content {
+    order: -1;
+    flex: 2;
   }
 }
