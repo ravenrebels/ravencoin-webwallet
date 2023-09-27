@@ -1,5 +1,6 @@
 # ravencoin-webwallet
 Web wallet for Ravencoin!
+Non-custodial, your keys never leave your browser.
 
 
 ## How to build
