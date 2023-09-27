@@ -68,7 +68,7 @@ export function Send({
     return false;
   }
 
-  const allAssets = getAssetBalanceIncludingMempool(assets, mempool);
+  const allAssets = getAssetBalanceIncludingMempool(wallet, assets, mempool);
   const options = Object.keys(allAssets).map((assetName: string) => {
     const balance = allAssets[assetName];
     if (balance > 0) {
