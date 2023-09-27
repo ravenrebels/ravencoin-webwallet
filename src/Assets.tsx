@@ -18,7 +18,7 @@ interface IAsset {
   balance: number;
 }
 export function Assets({ wallet, assets, mempool }) {
-  const allAssets = getAssetBalanceIncludingMempool(assets, mempool);
+  const allAssets = getAssetBalanceIncludingMempool(wallet, assets, mempool);
 
   return (
     <article>

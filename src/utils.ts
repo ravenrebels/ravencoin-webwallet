@@ -1,3 +1,4 @@
+import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 import { IAsset } from "./Types";
 
 const CryptoJS = require("crypto-js");
@@ -43,6 +44,7 @@ export function setMnemonic(_value: string) {
   }
 }
 export function getAssetBalanceIncludingMempool(
+  wallet: Wallet,
   assets: IAsset[],
   mempool: any
 ) {
@@ -53,15 +55,21 @@ export function getAssetBalanceIncludingMempool(
   );
 
   //Add assets from mempool
-  mempool.map((m: IAsset) => {
-    const hasAsset = allAssets.hasOwnProperty(m.assetName);
+  if (mempool && mempool.length > 0) {
+    mempool.map((m: IAsset) => {
+      //Ignore base currency such as RVN or EVR
+      if (m.assetName === wallet.baseCurrency) {
+        return;
+      }
+      const hasAsset = allAssets.hasOwnProperty(m.assetName);
 
-    if (hasAsset === false) {
-      allAssets[m.assetName] = 0;
-    }
-    const pending = getAssetBalanceFromMempool(m.assetName, mempool);
-    allAssets[m.assetName] += pending;
-  });
+      if (hasAsset === false) {
+        allAssets[m.assetName] = 0;
+      }
+      const pending = getAssetBalanceFromMempool(m.assetName, mempool);
+      allAssets[m.assetName] += pending;
+    });
+  }
 
   return allAssets;
 }
@@ -81,6 +89,5 @@ export function getAssetBalanceFromMempool(assetName: string, mempool: any) {
   });
   return pending;
 }
-
 
 export const WALLET_ADDRESS = "- Wallet address (first address in wallet)";

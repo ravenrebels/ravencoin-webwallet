@@ -33,10 +33,9 @@ function BlockTime({ blockHeight, wallet }) {
 }
 export function History({ wallet }) {
   const [history, setHistory] = React.useState<any>([]);
-  const [isOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
-    wallet.getHistory().then(setHistory);
+    wallet.getHistory().then(setHistory, wallet.baseCurrency);
   }, []);
   const items = getHistory(history);
   const listItems = items.map((item: any, index: number) => {

@@ -52,7 +52,8 @@ function App() {
     RavencoinWallet.createInstance({
       minAmountOfAddresses: 50,
       mnemonic,
-      network 
+      network: "evr-test",
+      rpc_url: "http://localhost:9999/rpc",
     }).then(setWallet);
   }, [mnemonic]);
 
