@@ -14,7 +14,7 @@ export function Balance({
 }) {
   let pending = getAssetBalanceFromMempool(wallet.baseCurrency, mempool);
   const hasPending = pending !== 0;
-  const price = useUSDPrice();
+  const price = useUSDPrice(wallet);
   const _balance = balance + pending;
 
   const dollarValue = (price * _balance).toLocaleString("en-US", {
@@ -36,23 +36,30 @@ export function Balance({
       )}
       <h1 className="rebel-balance">
         {balanceText} {wallet.baseCurrency}
-        <div className="rebel-balance__dollar-value">{dollarValue}</div>
+        {wallet.baseCurrency === "RVN" && (
+          <div className="rebel-balance__dollar-value">{dollarValue}</div>
+        )}
       </h1>
     </div>
   );
 }
 
-function useUSDPrice() {
+function useUSDPrice(wallet: Wallet) {
   const [price, setPrice] = React.useState(0);
 
   React.useEffect(() => {
+    const isRavencoin = wallet && wallet.baseCurrency === "RVN";
+
     const work = () => {
-      const URL = "https://api1.binance.com/api/v3/ticker/price?symbol=RVNUSDT";
-      fetch(URL)
-        .then((response) => response.json())
-        .then((obj) => {
-          setPrice(parseFloat(obj.price));
-        });
+      if (isRavencoin === true) {
+        const URL =
+          "https://api1.binance.com/api/v3/ticker/price?symbol=RVNUSDT";
+        fetch(URL)
+          .then((response) => response.json())
+          .then((obj) => {
+            setPrice(parseFloat(obj.price));
+          });
+      }
     };
     const interval = setInterval(work, 60 * 1000);
     work();

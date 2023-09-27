@@ -2,7 +2,10 @@ import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 import { IAsset } from "./Types";
 import { QrReader } from "react-qr-reader";
-import { getAssetBalanceFromMempool, getAssetBalanceIncludingMempool } from "./utils";
+import {
+  getAssetBalanceFromMempool,
+  getAssetBalanceIncludingMempool,
+} from "./utils";
 export function Send({
   assets,
   balance,
@@ -11,7 +14,7 @@ export function Send({
 }: {
   assets: IAsset[];
   balance: number;
-  mempool:any;
+  mempool: any;
   wallet: Wallet;
 }) {
   const [to, setTo] = React.useState("");
@@ -66,12 +69,11 @@ export function Send({
   }
 
   const allAssets = getAssetBalanceIncludingMempool(assets, mempool);
-  const options = Object.keys(allAssets).map((assetName:string) => {
-    const balance = allAssets[assetName]
+  const options = Object.keys(allAssets).map((assetName: string) => {
+    const balance = allAssets[assetName];
     if (balance > 0) {
-      
-      const balanceDisplay =balance.toLocaleString();
-      if(balanceDisplay === "0"){
+      const balanceDisplay = balance.toLocaleString();
+      if (balanceDisplay === "0") {
         return null;
       }
       return (
@@ -83,7 +85,8 @@ export function Send({
     return null;
   });
 
-  const displayBalance = balance + getAssetBalanceFromMempool(wallet.baseCurrency, mempool);
+  const displayBalance =
+    balance + getAssetBalanceFromMempool(wallet.baseCurrency, mempool);
   return (
     <article>
       <h5>Send / transfer / pay</h5>
@@ -105,7 +108,9 @@ export function Send({
             value={asset}
           >
             <option>-</option>
-            <option value="RVN">RVN ({displayBalance})</option>
+            <option value={wallet.baseCurrency}>
+              {wallet.baseCurrency} ({displayBalance})
+            </option>
             {options}
           </select>
         </label>
