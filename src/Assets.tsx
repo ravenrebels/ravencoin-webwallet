@@ -32,6 +32,9 @@ export function Assets({ wallet, assets, mempool }) {
         </thead>
         <tbody>
           {Object.keys(allAssets).map((assetName: string) => {
+            if(assetName === wallet.baseCurrency){
+              return null; //Exlude base currency, for example RVN or EVR
+            }
             const balance = allAssets[assetName];
             if (balance === 0) {
               return null;
