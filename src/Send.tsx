@@ -43,21 +43,27 @@ export function Send({
       alert(to + " does not seem to be a valid address");
     } else {
       //OK we are ready to send
-      const c = confirm(
-        "Do you want to send " + amount + " " + asset + " to " + to
-      );
+      const sendResult = await wallet.createTransaction({
+        toAddress: to,
+        assetName: asset,
+        amount: parseFloat(amount),
+      });
+      //Yes template literals combined, to avoid the headache of new lines getting indented
+      const confirmText =
+        `Do you want to send ${amount} ${asset} to ${to}?` +
+        "\n" +
+        `Transaction fee: ${sendResult.debug.fee} ${wallet.baseCurrency}`;
+      const c = confirm(confirmText);
       if (c === true) {
         try {
-          const result = await wallet.send({
-            toAddress: to,
-            assetName: asset,
-            amount: parseFloat(amount),
-          });
-          console.log(result.transactionId);
-          alert("Success");
-          setTo("");
-          setAmount("");
-          setAsset("");
+          const raw = sendResult.debug.signedTransaction;
+          if (raw) {
+            await wallet.sendRawTransaction(raw);
+            setTo("");
+            setAmount("");
+            setAsset("");
+            document.body.dispatchEvent(new Event("dirty"));
+          }
         } catch (e) {
           console.error(e);
           alert("" + e);

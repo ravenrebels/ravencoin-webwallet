@@ -72,12 +72,14 @@ function App() {
     //Fetch updates every 15 seconds
     const blockInterval = setInterval(fetchBlockCount, 15 * 1000);
 
-    //Fetch mempool every 10 seconds
-    const mempoolInterval = setInterval(async () => {
+    const fetchMempool = async () => {
       const promise = wallet.getMempool();
       const m = await promise;
       setMempool(m);
-    }, 10 * 1000);
+    };
+    document.body.addEventListener("dirty", fetchMempool);
+    //Fetch mempool every 10 seconds
+    const mempoolInterval = setInterval(fetchMempool, 10 * 1000);
 
     return function cleanUp() {
       clearInterval(blockInterval);
