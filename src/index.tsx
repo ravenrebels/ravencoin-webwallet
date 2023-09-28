@@ -11,13 +11,16 @@ import { ReceiveAddress } from "./ReceiveAddress";
 import { Balance } from "./Balance";
 import { Loader } from "./Loader";
 import { Send } from "./Send";
-import { IAsset } from "./Types";
 import { Login } from "./Login";
 import { Sweep } from "./Sweep";
 import { Navigator } from "./Navigator";
 import { Routes } from "./Routes";
 import { Footer } from "./Footer";
 import { Sign } from "./sign/Sign";
+import { useMempool } from "./hooks/useMempool";
+import { useBlockCount } from "./hooks/useBlockCount";
+import { useBalance } from "./hooks/useBalance";
+import { useAssets } from "./hooks/useAssets";
 
 let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
@@ -27,14 +30,17 @@ type ChainType = "rvn" | "rvn-test";
 const initMnemonic = getMnemonic();
 function App() {
   const [currentRoute, setCurrentRoute] = React.useState(Routes.HOME);
-  const [mempool, setMempool] = React.useState<any>([]);
-  const [receiveAddress, setReceiveAddress] = React.useState("");
-  const [mnemonic, setMnemonic] = React.useState(initMnemonic);
 
-  const [assets, setAssets] = React.useState<IAsset[]>([]);
-  const [balance, setBalance] = React.useState(0);
-  const [blockCount, setBlockCount] = React.useState(0);
+  const [receiveAddress, setReceiveAddress] = React.useState("");
+  const [mnemonic] = React.useState(initMnemonic);
+
   const [wallet, setWallet] = React.useState<null | Wallet>(null);
+  const blockCount = useBlockCount(wallet);
+
+  const balance = useBalance(wallet, blockCount);
+
+  const mempool = useMempool(wallet, blockCount);
+  const assets = useAssets(wallet, blockCount);
 
   //At startup init wallet
   React.useEffect(() => {
@@ -56,44 +62,10 @@ function App() {
     }).then(setWallet);
   }, [mnemonic]);
 
-  //When wallet changes (like has been created) setup interval for fetching block count
-  React.useEffect(() => {
-    if (!wallet) {
-      return;
-    }
-    async function fetchBlockCount() {
-      const b = await wallet?.rpc("getblockcount", []);
-      if (b !== blockCount) {
-        setBlockCount(b);
-      } else {
-      }
-    }
-    fetchBlockCount();
-    //Fetch updates every 15 seconds
-    const blockInterval = setInterval(fetchBlockCount, 15 * 1000);
-
-    const fetchMempool = async () => {
-      const promise = wallet.getMempool();
-      const m = await promise;
-      setMempool(m);
-    };
-    document.body.addEventListener("dirty", fetchMempool);
-    //Fetch mempool every 10 seconds
-    const mempoolInterval = setInterval(fetchMempool, 10 * 1000);
-
-    return function cleanUp() {
-      clearInterval(blockInterval);
-      clearInterval(mempoolInterval);
-    };
-  }, [wallet]);
-
   //Fetch data on each block update
   React.useEffect(() => {
     if (wallet) {
-      wallet.getMempool().then(setMempool);
       wallet.getReceiveAddress().then(setReceiveAddress);
-      wallet.getAssets().then(setAssets);
-      wallet.getBalance().then(setBalance);
     }
   }, [blockCount]);
 

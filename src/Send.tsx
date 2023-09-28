@@ -6,6 +6,7 @@ import {
   getAssetBalanceFromMempool,
   getAssetBalanceIncludingMempool,
 } from "./utils";
+import { Events, triggerEvent } from "./Events";
 export function Send({
   assets,
   balance,
@@ -27,10 +28,56 @@ export function Send({
     setShowQRCode(false);
   }
   const qr = useQRReader(showQRCode, onResult);
+
+  const send = async () => {
+    const promise = wallet.createTransaction({
+      toAddress: to,
+      assetName: asset,
+      amount: parseFloat(amount),
+    });
+
+    try {
+      await promise;
+    } catch (e) {
+      alert("" + e);
+      return;
+    }
+
+    const sendResult = await promise;
+    //Yes template literals combined, to avoid the headache of new lines getting indented
+    const confirmText =
+      `Do you want to send ${amount} ${asset} to ${to}?` +
+      "\n" +
+      `Transaction fee: ${sendResult.debug.fee} ${wallet.baseCurrency}`;
+    const c = confirm(confirmText);
+    if (c === true) {
+      try {
+        const raw = sendResult.debug.signedTransaction;
+        if (raw) {
+          const promise = wallet.sendRawTransaction(raw);
+
+          promise
+            .then(() => {
+              setTo("");
+              setAmount("");
+              setAsset("");
+              triggerEvent(Events.INFO__TRANSFER_IN_PROCESS);
+            })
+            .catch((e) => {
+              alert("" + e);
+            });
+        }
+      } catch (e) {
+        console.error(e);
+        alert("" + e);
+      }
+    }
+
+    return false;
+  };
+
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-
-    setIsBusy(true);
     //Validate amount
     if (isNaN(parseFloat(amount)) === true) {
       alert(amount + " does not seem like a valid number");
@@ -41,39 +88,18 @@ export function Send({
 
     if (validateAddressResponse.isvalid === false) {
       alert(to + " does not seem to be a valid address");
-    } else {
-      //OK we are ready to send
-      const sendResult = await wallet.createTransaction({
-        toAddress: to,
-        assetName: asset,
-        amount: parseFloat(amount),
-      });
-      //Yes template literals combined, to avoid the headache of new lines getting indented
-      const confirmText =
-        `Do you want to send ${amount} ${asset} to ${to}?` +
-        "\n" +
-        `Transaction fee: ${sendResult.debug.fee} ${wallet.baseCurrency}`;
-      const c = confirm(confirmText);
-      if (c === true) {
-        try {
-          const raw = sendResult.debug.signedTransaction;
-          if (raw) {
-            await wallet.sendRawTransaction(raw);
-            setTo("");
-            setAmount("");
-            setAsset("");
-            document.body.dispatchEvent(new Event("dirty"));
-          }
-        } catch (e) {
-          console.error(e);
-          alert("" + e);
-        }
-      }
+      return false;
     }
-    setIsBusy(false);
-    return false;
-  }
 
+    setIsBusy(true);
+    const promise = send();
+    promise.catch(() => {
+      //Do nothing);
+    });
+    promise.finally(() => {
+      setIsBusy(false);
+    });
+  }
   const allAssets = getAssetBalanceIncludingMempool(wallet, assets, mempool);
   const options = Object.keys(allAssets).map((assetName: string) => {
     const balance = allAssets[assetName];
