@@ -23,7 +23,7 @@ export function useMempool(wallet: Wallet | null, blockCount: number) {
   //Add event listeners ONCE
   React.useEffect(() => {
     const listener = () => {
-      setTimeout(fetchMempool, 1000);
+      setTimeout(fetchMempool, 1000); //Wait a sec before fetching
     };
     addEventListener(Events.INFO__TRANSFER_IN_PROCESS, listener);
     return () => {

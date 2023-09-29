@@ -21,6 +21,7 @@ import { useMempool } from "./hooks/useMempool";
 import { useBlockCount } from "./hooks/useBlockCount";
 import { useBalance } from "./hooks/useBalance";
 import { useAssets } from "./hooks/useAssets";
+import { useReceiveAddress } from "./hooks/useReceiveAddress";
 
 let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
@@ -31,12 +32,12 @@ const initMnemonic = getMnemonic();
 function App() {
   const [currentRoute, setCurrentRoute] = React.useState(Routes.HOME);
 
-  const [receiveAddress, setReceiveAddress] = React.useState("");
   const [mnemonic] = React.useState(initMnemonic);
 
   const [wallet, setWallet] = React.useState<null | Wallet>(null);
-  const blockCount = useBlockCount(wallet);
 
+  const blockCount = useBlockCount(wallet);
+  const receiveAddress = useReceiveAddress(wallet, blockCount);
   const balance = useBalance(wallet, blockCount);
 
   const mempool = useMempool(wallet, blockCount);
@@ -61,13 +62,6 @@ function App() {
       network,
     }).then(setWallet);
   }, [mnemonic]);
-
-  //Fetch data on each block update
-  React.useEffect(() => {
-    if (wallet) {
-      wallet.getReceiveAddress().then(setReceiveAddress);
-    }
-  }, [blockCount]);
 
   if (!mnemonic) {
     return <Login />;
