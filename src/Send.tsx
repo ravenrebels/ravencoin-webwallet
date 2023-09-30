@@ -7,6 +7,7 @@ import {
   getAssetBalanceIncludingMempool,
 } from "./utils";
 import { Events, triggerEvent } from "./Events";
+import { betterAlert, betterConfirm } from "./betterDialog";
 export function Send({
   assets,
   balance,
@@ -39,7 +40,7 @@ export function Send({
     try {
       await promise;
     } catch (e) {
-      alert("" + e);
+      betterAlert("Error", "" + e);
       return;
     }
 
@@ -49,7 +50,8 @@ export function Send({
       `Do you want to send ${amount} ${asset} to ${to}?` +
       "\n" +
       `Transaction fee: ${sendResult.debug.fee} ${wallet.baseCurrency}`;
-    const c = confirm(confirmText);
+    // const c = confirm(confirmText);
+    const c = await betterConfirm("About to send", confirmText);
     if (c === true) {
       try {
         const raw = sendResult.debug.signedTransaction;
@@ -64,12 +66,12 @@ export function Send({
               triggerEvent(Events.INFO__TRANSFER_IN_PROCESS);
             })
             .catch((e) => {
-              alert("" + e);
+              betterAlert("Error", "" + e);
             });
         }
       } catch (e) {
         console.error(e);
-        alert("" + e);
+        betterAlert("Error", "" + e);
       }
     }
 
@@ -80,14 +82,17 @@ export function Send({
     event.preventDefault();
     //Validate amount
     if (isNaN(parseFloat(amount)) === true) {
-      alert(amount + " does not seem like a valid number");
+      betterAlert(
+        "Not a valid number",
+        amount + " does not seem like a valid number"
+      );
       return;
     }
     //Validate that "to address" is a valid address
     const validateAddressResponse = await wallet.rpc("validateaddress", [to]);
 
     if (validateAddressResponse.isvalid === false) {
-      alert(to + " does not seem to be a valid address");
+      betterAlert("Error", to + " does not seem to be a valid address");
       return false;
     }
 
