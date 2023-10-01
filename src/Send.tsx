@@ -7,7 +7,7 @@ import {
   getAssetBalanceIncludingMempool,
 } from "./utils";
 import { Events, triggerEvent } from "./Events";
-import { betterAlert, betterConfirm } from "./betterDialog";
+import { betterAlert, betterConfirm, betterToast } from "./betterDialog";
 export function Send({
   assets,
   balance,
@@ -64,6 +64,7 @@ export function Send({
               setAmount("");
               setAsset("");
               triggerEvent(Events.INFO__TRANSFER_IN_PROCESS);
+              betterToast("✓ Success");
             })
             .catch((e) => {
               betterAlert("Error", "" + e);
