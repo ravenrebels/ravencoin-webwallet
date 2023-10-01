@@ -49,7 +49,9 @@ export function Send({
     const confirmText =
       `Do you want to send ${amount} ${asset} to ${to}?` +
       "\n" +
-      `Transaction fee: ${sendResult.debug.fee} ${wallet.baseCurrency}`;
+      `Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${
+        wallet.baseCurrency
+      }`;
     // const c = confirm(confirmText);
     const c = await betterConfirm("About to send", confirmText);
     if (c === true) {
