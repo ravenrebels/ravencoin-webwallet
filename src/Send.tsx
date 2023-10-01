@@ -57,7 +57,7 @@ export function Send({
         const raw = sendResult.debug.signedTransaction;
         if (raw) {
           const promise = wallet.sendRawTransaction(raw);
-
+          console.log("Send raw transaction promise", promise);
           promise
             .then(() => {
               setTo("");
@@ -67,6 +67,7 @@ export function Send({
               betterToast("✓ Success");
             })
             .catch((e) => {
+              console.log("Error when broadcasting transaction", e + "", e);
               betterAlert("Error", "" + e);
             });
         }
