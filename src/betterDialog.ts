@@ -1,11 +1,10 @@
 enum DialogType {
-  ALERT,
-  CONFIRM,
-  TOAST,
+  ALERT = "ALERT",
+  CONFIRM = "CONFIRM",
+  TOAST = "TOAST",
 }
 
 export function betterToast(text: string) {
-  console.log("better toast");
   const html = ` <dialog open><article style="border: 1px solid grey" > 
   </header>
   <p>
@@ -31,6 +30,21 @@ export async function betterAlert(headline, text): Promise<boolean> {
   });
   return promise;
 }
+
+function getButtons(dialogType: DialogType) {
+  if (dialogType === DialogType.CONFIRM) {
+    return `
+      <button class="secondary" style="max-width: 150px">Cancel</button> 
+      <button class="primary" style="max-width: 150px">OK</button>
+      `;
+  } else if (DialogType.ALERT) {
+    return ` 
+      <button class="primary" style="max-width: 150px">OK</button>
+      `;
+  }
+  return "";
+}
+
 function createDialog(
   dialogType: DialogType,
   headline: string,
@@ -38,19 +52,7 @@ function createDialog(
   resolve,
   reject
 ) {
-  function getButtons(dialogType: DialogType) {
-    if (dialogType === DialogType.CONFIRM) {
-      return `
-        <button class="secondary" style="max-width: 150px">Cancel</button> 
-        <button class="primary" style="max-width: 150px">OK</button>
-        `;
-    } else if (DialogType.ALERT) {
-      return ` 
-        <button class="primary" style="max-width: 150px">OK</button>
-        `;
-    }
-    return "";
-  }
+  console.log("createDialog", dialogType);
   const html = `   <dialog open>
       <article style="border: 1px solid grey" >
         <header>
