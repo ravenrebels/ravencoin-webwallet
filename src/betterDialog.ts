@@ -59,9 +59,7 @@ function createDialog(
           <a href="#close" aria-label="Close" class="close"></a>
           ${headline}
         </header>
-        <p>
-         ${text}
-        </p>
+        <p style="white-space: pre">${text}</p>
         <footer style="display:flex; justify-content: space-between">  
          ${getButtons(dialogType)}
         </footer>

@@ -46,12 +46,10 @@ export function Send({
 
     const sendResult = await promise;
     //Yes template literals combined, to avoid the headache of new lines getting indented
-    const confirmText =
-      `Do you want to send ${amount} ${asset} to ${to}?` +
-      "\n" +
-      `Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${
-        wallet.baseCurrency
-      }`;
+    const confirmText = `Do you want to send ${amount} ${asset} to 
+${to}?
+
+Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
     // const c = confirm(confirmText);
     const c = await betterConfirm("About to send", confirmText);
     if (c === true) {
