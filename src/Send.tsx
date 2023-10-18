@@ -67,13 +67,25 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
               betterToast("✓ Success");
             })
             .catch((e) => {
-              console.log("Error when broadcasting transaction", e + "", e);
-              betterAlert("Error", "" + e);
+              const isTxSize = JSON.stringify(e).indexOf("64: tx-size") > -1;
+              if (isTxSize) {
+                betterAlert(
+                  "Error",
+                  "Oops the transaction was to big, try sending a smaller amount"
+                );
+              } else {
+                console.log("Error when broadcasting transaction", e + "", e);
+                betterAlert(
+                  "Error",
+                  "" + e && JSON.stringify(e.error, null, 4)
+                );
+              }
             });
         }
       } catch (e) {
         console.error(e);
-        betterAlert("Error", "" + e);
+
+        betterAlert("Error", "" + e && JSON.stringify(e.error, null, 4));
       }
     }
 

@@ -48,7 +48,7 @@ function App() {
     if (!mnemonic) {
       return;
     }
-
+    let minAmountOfAddresses = 50;
     //Override network to rvn-test if present in query string (search)
     const searchParams = new URLSearchParams(window.location.search);
     let network: ChainType = "rvn";
@@ -56,8 +56,15 @@ function App() {
       network = "rvn-test";
     }
 
+    if (searchParams.get("min")) {
+      const v = searchParams.get("min");
+      if (v && isFinite(parseInt(v)) === true) {
+        minAmountOfAddresses = parseInt(v);
+      }
+    }
+
     RavencoinWallet.createInstance({
-      minAmountOfAddresses: 50,
+      minAmountOfAddresses,
       mnemonic,
       network,
     }).then(setWallet);
