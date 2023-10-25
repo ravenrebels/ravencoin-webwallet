@@ -35,9 +35,14 @@ export function History({ wallet }) {
   const [history, setHistory] = React.useState<any>([]);
 
   React.useEffect(() => {
-    wallet.getHistory().then(setHistory, wallet.baseCurrency);
+    wallet.getHistory().then(setHistory);
   }, []);
+
+
+  history.map((h) => (h.value = h.satoshis / 1e8));
+  //console.table(history); 
   const items = getHistory(history);
+  console.table(items);
   const listItems = items.map((item: any, index: number) => {
     if (index > 40) {
       return null;
