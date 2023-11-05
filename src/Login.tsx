@@ -59,9 +59,10 @@ export function Login() {
       {dialog}
       <h1 className="rebel-headline">Sign in</h1>
       <p>
-        This web app only saves your 12 words in memory and the words are lost
-        when you sign out or the web browser cache is cleared.
-        <br /> For real, keep your 12 words saved/backuped somewhere safe.
+        This web app only stores your 12 words temporarily in memory, and the
+        information is lost when you sign out or clear the web browser's cache.
+        Truly, ensure that you save or back up your 12 words in a secure
+        location..
       </p>
       <h5>Enter your 12 words</h5>
       <form onSubmit={onSubmit}>
