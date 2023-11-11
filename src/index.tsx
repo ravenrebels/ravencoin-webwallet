@@ -26,7 +26,7 @@ import { useReceiveAddress } from "./hooks/useReceiveAddress";
 let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
 
-type ChainType = "rvn" | "rvn-test";
+type ChainType = "rvn" | "rvn-test" | "evr";
 
 const initMnemonic = getMnemonic();
 function App() {
@@ -54,6 +54,10 @@ function App() {
     let network: ChainType = "rvn";
     if (searchParams.get("network") === "rvn-test") {
       network = "rvn-test";
+    }
+
+    if (searchParams.get("network") === "evr") {
+      network = "evr";
     }
 
     if (searchParams.get("min")) {
