@@ -38,11 +38,13 @@ export function History({ wallet }) {
     wallet.getHistory().then(setHistory);
   }, []);
 
+  history.map(
+    (h: { value: number; satoshis: number }) => (h.value = h.satoshis / 1e8)
+  );
 
-  history.map((h) => (h.value = h.satoshis / 1e8));
-  //console.table(history); 
   const items = getHistory(history);
-  console.table(items);
+  items.sort((item1, item2) => item2.blockHeight - item1.blockHeight);
+
   const listItems = items.map((item: any, index: number) => {
     if (index > 40) {
       return null;
