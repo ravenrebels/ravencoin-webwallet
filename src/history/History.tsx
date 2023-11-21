@@ -49,6 +49,7 @@ export function History({ blockCount, wallet }: IProps) {
           {item.assets[0].value.toLocaleString()}{" "}
           <AssetName name={item.assets[0].assetName} />
         </LabeledContent>
+        <Spacer y={0.5} />
         <LabeledContent label="Fee">
           <Fee wallet={wallet} transactionId={item.transactionId} />
         </LabeledContent>
@@ -57,15 +58,18 @@ export function History({ blockCount, wallet }: IProps) {
           <summary>More info</summary>
 
           <div style={{ marginTop: "calc(2 * var(--pico-spacing))" }}>
+            <Spacer y={2} />
             <ToAddress wallet={wallet} transactionId={item.transactionId} />
-
+            <Spacer y={2} />
             <fieldset>
-              <h3>Transaction id</h3>
-
-              <input type="text" disabled={true} value={item.transactionId} />
+              <label>
+                Transaction id
+                <input type="text" disabled={true} value={item.transactionId} />
+              </label>
 
               <CopyButton value={item.transactionId} title="Copy" />
             </fieldset>
+            <Spacer y={2} />
             <p>
               <a href={URL} target="_blank">
                 View in block explorer
@@ -132,4 +136,10 @@ function Fee({ wallet, transactionId }) {
 
 function truncateToFourDecimals(num) {
   return Math.floor(num * 10000) / 10000;
+}
+
+function Spacer({ y }: { y: 0.5 | 1 | 2 }) {
+  return (
+    <div style={{ marginTop: "calc(" + y + "*var(--pico-spacing))" }}></div>
+  );
 }

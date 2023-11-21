@@ -38,10 +38,11 @@ export function ToAddress({
       const addy = output.scriptPubKey.addresses[0];
 
       return (
-        <div style={{ marginTop: "var(--pico-spacing)" }}>
-          <h3>To address</h3>
-
-          <input type="text" disabled={true} value={addy} />
+        <div>
+          <label>
+            To address
+            <input type="text" disabled={true} value={addy} />
+          </label>
 
           <p>
             <CopyButton value={addy} title="Copy" />
