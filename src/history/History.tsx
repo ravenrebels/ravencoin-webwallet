@@ -5,6 +5,7 @@ import { LabeledContent } from "./LabeledContent";
 import { ToAddress } from "./ToAddress";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 import { CopyButton } from "../components/CopyButton";
+import { useTransaction } from "../useTransaction";
 
 interface IProps {
   blockCount: number | null;
@@ -38,18 +39,24 @@ export function History({ blockCount, wallet }: IProps) {
     return (
       <article key={item.transactionId} style={style2}>
         <h3>
-          <BlockTime blockHeight={item.blockHeight} wallet={wallet}></BlockTime>
+          <BlockTime
+            transactionId={item.transactionId}
+            wallet={wallet}
+          ></BlockTime>
         </h3>
 
         <LabeledContent label="Amount">
           {item.assets[0].value.toLocaleString()}{" "}
           <AssetName name={item.assets[0].assetName} />
         </LabeledContent>
+        <LabeledContent label="Fee">
+          <Fee wallet={wallet} transactionId={item.transactionId} />
+        </LabeledContent>
 
         <details style={{ marginTop: "calc(2 * var(--pico-spacing))" }}>
           <summary>More info</summary>
 
-          <div>
+          <div style={{ marginTop: "calc(2 * var(--pico-spacing))" }}>
             <ToAddress wallet={wallet} transactionId={item.transactionId} />
 
             <fieldset>
@@ -75,33 +82,54 @@ export function History({ blockCount, wallet }: IProps) {
 export interface ITransaction {
   vin: any;
   vout: any;
+  time: number;
 }
-//Keep a map/list of block by block height
-const heightToBlock = new Map();
 
-function BlockTime({ blockHeight, wallet }) {
-  const [time, setTime] = React.useState<any>();
+function BlockTime({ transactionId, wallet }) {
+  const transaction = useTransaction(wallet, transactionId);
 
-  React.useEffect(() => {
-    const block = heightToBlock.get(blockHeight);
-    //If we have already cached this block, just set the time
-    if (block) {
-      const date = new Date(block.time * 1000);
-      setTime(date);
-    }
-    //If we have NOT fetched this block, fetch it, cache it and set time
-    else {
-      wallet.rpc("getblockhash", [blockHeight]).then((hash: string) => {
-        wallet.rpc("getblock", [hash, 1]).then((block: any) => {
-          heightToBlock.set(blockHeight, block);
-          setTime(new Date(block.time * 1000));
-        });
-      });
-    }
-  }, [blockHeight]);
-
+  if (!transaction) {
+    return null;
+  }
+  const time = new Date(transaction.time * 1000);
   if (time) {
     return time.toLocaleString();
   }
   return null;
+}
+
+function Fee({ wallet, transactionId }) {
+  const transaction = useTransaction(wallet, transactionId);
+
+  if (!transaction) {
+    return null;
+  }
+
+  const myAddresses = wallet.getAddresses();
+
+  //We send if any of the outputs are from our wallet
+  const sent = transaction.vin.some((input) => {
+    if (input.address) {
+      return myAddresses.includes(input.address);
+    }
+    return false;
+  });
+
+  if (!sent) {
+    return null;
+  }
+  let totalInput = 0;
+  let totalOutput = 0;
+
+  transaction.vin.map((o) => (totalInput += o.value));
+
+  transaction.vout.map((o) => (totalOutput += o.value));
+
+  const fee = totalInput - totalOutput;
+
+  return truncateToFourDecimals(fee);
+}
+
+function truncateToFourDecimals(num) {
+  return Math.floor(num * 10000) / 10000;
 }
