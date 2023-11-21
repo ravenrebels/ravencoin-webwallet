@@ -1,9 +1,9 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
-import { 
-  getAssetBalanceIncludingMempool,
-} from "./utils";
+import { getAssetBalanceIncludingMempool } from "./utils";
 import { AssetName } from "./AssetName";
+
+import networkInfo from "./networkInfo";
 
 const imageStyle = {
   maxWidth: "80px",
@@ -32,7 +32,7 @@ export function Assets({ wallet, assets, mempool }) {
         </thead>
         <tbody>
           {Object.keys(allAssets).map((assetName: string) => {
-            if(assetName === wallet.baseCurrency){
+            if (assetName === wallet.baseCurrency) {
               return null; //Exlude base currency, for example RVN or EVR
             }
             const balance = allAssets[assetName];
@@ -76,9 +76,8 @@ function LinkToIPFS({ wallet, assetName }: LinkToIPFSProps) {
 
   if (assetData && assetData.ipfs_hash) {
     const url = "https://cloudflare-ipfs.com/ipfs/" + assetData.ipfs_hash;
-    const imageURL =
-      "https://rvn-explorer-mainnet.ting.finance/thumbnail?assetName=" +
-      encodeURIComponent(assetName);
+    const imageURL = networkInfo[wallet.network].getThumbnailURL(assetName);
+
     return (
       <div>
         <a
@@ -109,4 +108,3 @@ function LinkToIPFS({ wallet, assetName }: LinkToIPFSProps) {
     </span>
   );
 }
-

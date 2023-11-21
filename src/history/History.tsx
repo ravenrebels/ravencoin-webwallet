@@ -7,6 +7,7 @@ import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 import { CopyButton } from "../components/CopyButton";
 import { useTransaction } from "../useTransaction";
 
+import networkInfo from "../networkInfo";
 interface IProps {
   blockCount: number | null;
   wallet: Wallet;
@@ -30,7 +31,9 @@ export function History({ blockCount, wallet }: IProps) {
       return null;
     }
 
-    const URL = "https://rvn.cryptoscope.io/tx/?txid=" + item.transactionId;
+    const URL = networkInfo[wallet.network].getTransactionURL(
+      item.transactionId
+    );
 
     const style2 = {
       background: "var(--pico-background-color)",

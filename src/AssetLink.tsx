@@ -2,6 +2,9 @@ import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 //@ts-ignore
 import logo from "../ravencoin-rvn-logo.png";
+
+import networkInfo from "./networkInfo";
+
 const imageStyle = {
   maxWidth: "80px",
   maxHeight: "80px",
@@ -39,9 +42,10 @@ export function AssetLink({ wallet, assetName }: LinkToIPFSProps) {
 
   if (assetData && assetData.ipfs_hash) {
     const url = "https://cloudflare-ipfs.com/ipfs/" + assetData.ipfs_hash;
-    const imageURL =
-      "https://rvn-explorer-mainnet.ting.finance/thumbnail?assetName=" +
-      encodeURIComponent(assetName);
+
+    const imageURL = networkInfo[wallet.network].getThumbnailURL(assetName);
+
+    console.log("Image URL", imageURL);
     return (
       <div>
         <a href={url} target="asset">
