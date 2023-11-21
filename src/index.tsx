@@ -4,7 +4,7 @@ import React from "react";
 import { getMnemonic } from "./utils";
 import { createRoot } from "react-dom/client";
 
-import { History } from "./History";
+import { History } from "./history/History";
 import { Assets } from "./Assets";
 import { Mempool } from "./Mempool";
 import { ReceiveAddress } from "./ReceiveAddress";
@@ -126,7 +126,9 @@ function App() {
 
           {currentRoute === Routes.SWEEP && <Sweep wallet={wallet} />}
 
-          {currentRoute === Routes.HISTORY && <History wallet={wallet} />}
+          {currentRoute === Routes.HISTORY && (
+            <History wallet={wallet} blockCount={blockCount} />
+          )}
 
           {currentRoute === Routes.SIGN && (
             <Sign assets={assets} wallet={wallet} />

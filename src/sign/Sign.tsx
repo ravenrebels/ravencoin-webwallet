@@ -1,7 +1,7 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 import { IAsset } from "../Types";
-import { CopyButton } from "./CopyButton";
+import { CopyButton } from "../components/CopyButton";
 import { useUniqueAssets } from "./useUniqueAssets";
 import { useSignature } from "./useSignature";
 import { useAddressObject } from "./useAddressObject";
@@ -57,11 +57,17 @@ export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
             })}
         </select>
       </label>
-      <CopyButton value={selectedAsset}  title="Copy asset name"/>
+      <CopyButton value={selectedAsset} title="Copy asset name" />
       <hr />
-      <label>Address <input disabled value={addressObject && addressObject.address}></input></label>
-      <CopyButton value={addressObject && addressObject.address}  title="Copy address"/>
-      <hr/>
+      <label>
+        Address{" "}
+        <input disabled value={addressObject && addressObject.address}></input>
+      </label>
+      <CopyButton
+        value={addressObject && addressObject.address}
+        title="Copy address"
+      />
+      <hr />
       <label>
         Message to sign{" "}
         <textarea
@@ -73,7 +79,7 @@ export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
           {text}
         </textarea>
       </label>
-      <CopyButton value={text} title="Copy message"/>
+      <CopyButton value={text} title="Copy message" />
       <hr />
       <label>
         Signature
@@ -84,7 +90,8 @@ export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
         style={{ zoom: 0.7 }}
         onClick={(event) => navigator.clipboard.writeText(signature)}
       >
-        <CopyIcon />&nbsp;&nbsp;Copy signature
+        <CopyIcon />
+        &nbsp;&nbsp;Copy signature
       </button>
     </article>
   );

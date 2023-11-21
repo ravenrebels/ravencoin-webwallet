@@ -1,11 +1,8 @@
 import React from "react";
 
 export function AssetName({ name }) {
-  const style = {
-    paddingTop: 10,
-  };
   if (name.indexOf("/") === -1) {
-    return <div style={style}>{name}</div>;
+    return <span>{name}</span>;
   }
 
   if (name.indexOf("/") > -1) {
@@ -23,6 +20,6 @@ export function AssetName({ name }) {
       }
     }
 
-    return <div style={style}>{result}</div>;
+    return <span>{result}</span>;
   }
 }

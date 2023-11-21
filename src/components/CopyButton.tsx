@@ -1,7 +1,7 @@
 import React from "react";
 
 import { CopyIcon } from "../icons";
-export function CopyButton({ value, title }: {value: string, title:string }) {
+export function CopyButton({ value, title }: { value: string; title: string }) {
   return (
     <button
       className="outline"
