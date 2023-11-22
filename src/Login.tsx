@@ -1,8 +1,10 @@
 import React from "react";
 
 import RavencoinKey from "@ravenrebels/ravencoin-key";
-console.log("RavencoinKey", RavencoinKey);
-import { LightModeToggle } from "./LightModeToggle";
+
+//For bundler not to optimize/remove RavencoinKey
+console.log("RavencoinKey", !!RavencoinKey);
+import { LightModeToggle } from "./components/LightModeToggle";
 import { getMnemonic, setMnemonic } from "./utils";
 export function Login() {
   const [showWords, setShowWords] = React.useState(false);

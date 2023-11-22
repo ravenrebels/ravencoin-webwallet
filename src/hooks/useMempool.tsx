@@ -4,7 +4,6 @@ import { Events, addEventListener, triggerEvent } from "../Events";
 
 export function useMempool(wallet: Wallet | null, blockCount: number) {
   const [mempool, setMempool] = React.useState<any>([]);
-
   const fetchMempool = async () => {
     if (wallet) {
       const promise = wallet.getMempool();

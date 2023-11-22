@@ -1,8 +1,15 @@
 import React, { ReactNode } from "react";
 import { Routes } from "./Routes";
-import { LightModeToggle } from "./LightModeToggle";
+import { LightModeToggle } from "./components/LightModeToggle";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
-import { IconHistory, IconHome, IconReceive, IconSend, IconSign, IconSweep } from "./icons";
+import {
+  IconHistory,
+  IconHome,
+  IconReceive,
+  IconSend,
+  IconSign,
+  IconSweep,
+} from "./icons";
 export function Navigator({
   balance,
   wallet,

@@ -13,7 +13,9 @@ const ravencoinMainnet: INetworkInfo = {
     );
   },
   getThumbnailURL(assetName: string) {
-    return "https://cloudflare-ipfs.com/ipfs/QmZfw4LvEjMKfxpUsJGkuEYnbXkrVjMtbdbPq4WgmtSdG6";
+    const baseURL =
+      "https://rvn-explorer-mainnet.ting.finance/thumbnail?assetName=";
+    return baseURL + encodeURIComponent(assetName);
   },
 };
 

@@ -45,7 +45,6 @@ export function AssetLink({ wallet, assetName }: LinkToIPFSProps) {
 
     const imageURL = networkInfo[wallet.network].getThumbnailURL(assetName);
 
-    console.log("Image URL", imageURL);
     return (
       <div>
         <a href={url} target="asset">

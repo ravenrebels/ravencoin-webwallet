@@ -16,7 +16,7 @@ export function Sweep({ wallet }: { wallet: Wallet }) {
         alert(asdf.errorDescription);
         return;
       }
-      console.log(asdf);
+
       const text = JSON.stringify(asdf.outputs, null, 4);
       alert("SUCCESS " + text);
       document.getElementById("mempool")?.focus();

@@ -15,7 +15,7 @@ export function betterToast(text: string) {
   const dom = document.createElement("div");
   document.body.appendChild(dom);
   dom.innerHTML = html;
-  console.log("Ready");
+
   setTimeout(() => document.body.removeChild(dom), 1000);
 }
 export async function betterConfirm(headline, text): Promise<boolean> {
@@ -52,7 +52,6 @@ function createDialog(
   resolve,
   reject
 ) {
-  console.log("createDialog", dialogType);
   const html = `   <dialog open>
       <article style="border: 1px solid grey" >
         <header>
