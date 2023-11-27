@@ -32,7 +32,7 @@ export function Mempool({ mempool, wallet }: IMempoolProps) {
                 >
                   <div>
                     {item.isSent === true ? "sending" : "receiving"}{" "}
-                    {amount.toLocaleString()} <AssetName name={name}/>
+                    {amount.toLocaleString()} <AssetName name={name} />
                   </div>
 
                   <div>
