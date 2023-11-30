@@ -2,7 +2,7 @@ import React from "react";
 
 export function AssetName({ name }) {
   if (name.indexOf("/") === -1) {
-    return <span>{name}</span>;
+    return <span key={"assetName_" + name}>{name}</span>;
   }
 
   if (name.indexOf("/") > -1) {
@@ -13,13 +13,16 @@ export function AssetName({ name }) {
       const isLast = index === splitty.length - 1;
 
       if (isLast === false) {
-        result.push(<span>{s}/</span>);
-        result.push(<wbr></wbr>);
+        result.push(
+          <span key="part1">
+            {s}/<wbr></wbr>
+          </span>
+        );
       } else {
-        result.push(<span>{s}</span>);
+        result.push(<span key="part2">{s}</span>);
       }
     }
 
-    return <span>{result}</span>;
+    return <span key={Math.random()}>{result}</span>;
   }
 }

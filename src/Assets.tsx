@@ -44,7 +44,7 @@ export function Assets({ wallet, assets, mempool }) {
               paddingTop: 20,
             };
             return (
-              <tr key={assetName}>
+              <tr key={assetName || Math.random()}>
                 <td style={tdStyle}>
                   <LinkToIPFS wallet={wallet} assetName={assetName} />
                 </td>
