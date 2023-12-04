@@ -1,7 +1,8 @@
 {
-  "name": "ravencoin-webwallet",
+  "name": "rebel-wallet",
   "version": "0.1.1",
   "description": "Web wallet for Ravencoin",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build index.html --no-source-maps",
@@ -18,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@ravenrebels/ravencoin-history-list": "^1.2.4",
-    "@ravenrebels/ravencoin-jswallet": "^0.7.61",
+    "@ravenrebels/ravencoin-jswallet": "^0.7.62",
     "@ravenrebels/ravencoin-key": "^2.5.2",
     "@ravenrebels/ravencoin-message": "^0.7.0",
     "@types/react": "^18.2.6",
