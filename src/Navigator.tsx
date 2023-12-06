@@ -10,6 +10,7 @@ import {
   IconSign,
   IconSweep,
 } from "./icons";
+import networkInfo from "./networkInfo";
 export function Navigator({
   balance,
   wallet,
@@ -21,11 +22,7 @@ export function Navigator({
   wallet: Wallet;
   setRoute: any;
 }) {
-  const mappy = {
-    rvn: "Ravencoin mainnet",
-    "rvn-test": "Ravencoin testnet",
-  };
-  const networkDisplayName = mappy[wallet.network];
+  const networkDisplayName = networkInfo[wallet.network].displayName;
 
   return (
     <article className="rebel-navigator__container">

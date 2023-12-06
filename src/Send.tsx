@@ -26,7 +26,7 @@ export function Send({
   const [showQRCode, setShowQRCode] = React.useState(false);
   const [isBusy, setIsBusy] = React.useState(false);
 
-  const isSendButtenDisabled = isBusy === true ||  defaultValueAssets === asset;
+  const isSendButtenDisabled = isBusy === true || defaultValueAssets === asset;
 
   function onResult(to) {
     setTo(to);
@@ -124,25 +124,9 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
     });
   }
   const allAssets = getAssetBalanceIncludingMempool(wallet, assets, mempool);
-  const options = Object.keys(allAssets).map((assetName: string) => {
-    const balance = allAssets[assetName];
-    //Ignore base currency, such as RVN
-    if (wallet.baseCurrency === assetName) {
-      return null;
-    }
-    if (balance > 0) {
-      const balanceDisplay = balance.toLocaleString();
-      if (balanceDisplay === "0") {
-        return null;
-      }
-      return (
-        <option key={assetName} value={assetName}>
-          {assetName} - ({balance})
-        </option>
-      );
-    }
-    return null;
-  });
+  const options = (
+    <AssetOptions wallet={wallet} allAssets={allAssets}></AssetOptions>
+  );
 
   const displayBalance =
     balance + getAssetBalanceFromMempool(wallet.baseCurrency, mempool);
@@ -199,6 +183,33 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
   );
 }
 
+interface IAssetOptionsProps {
+  wallet: Wallet;
+  allAssets: { [key: string]: number };
+}
+function AssetOptions({ wallet, allAssets }: IAssetOptionsProps) {
+  const options = Object.keys(allAssets).map((assetName: string) => {
+    const balance = allAssets[assetName];
+    //Ignore base currency, such as RVN
+    if (wallet.baseCurrency === assetName) {
+      return null;
+    }
+    if (balance > 0) {
+      const balanceDisplay = balance.toLocaleString();
+      if (balanceDisplay === "0") {
+        return null;
+      }
+      return (
+        <option key={assetName} value={assetName}>
+          {assetName} - ({balance})
+        </option>
+      );
+    }
+    return null;
+  });
+
+  return options;
+}
 function useQRReader(
   showQRCode: boolean,
   onResult: (value: string | null) => void
