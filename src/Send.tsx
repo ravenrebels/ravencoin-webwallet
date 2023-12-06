@@ -19,11 +19,15 @@ export function Send({
   mempool: any;
   wallet: Wallet;
 }) {
+  const defaultValueAssets = "-";
   const [to, setTo] = React.useState("");
   const [amount, setAmount] = React.useState("");
-  const [asset, setAsset] = React.useState("-");
+  const [asset, setAsset] = React.useState(defaultValueAssets);
   const [showQRCode, setShowQRCode] = React.useState(false);
   const [isBusy, setIsBusy] = React.useState(false);
+
+  const isSendButtenDisabled = isBusy === true ||  defaultValueAssets === asset;
+
   function onResult(to) {
     setTo(to);
     setShowQRCode(false);
@@ -122,6 +126,10 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
   const allAssets = getAssetBalanceIncludingMempool(wallet, assets, mempool);
   const options = Object.keys(allAssets).map((assetName: string) => {
     const balance = allAssets[assetName];
+    //Ignore base currency, such as RVN
+    if (wallet.baseCurrency === assetName) {
+      return null;
+    }
     if (balance > 0) {
       const balanceDisplay = balance.toLocaleString();
       if (balanceDisplay === "0") {
@@ -158,7 +166,7 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
             onChange={(event) => setAsset(event.target.value)}
             value={asset}
           >
-            <option>-</option>
+            <option>{defaultValueAssets}</option>
             <option value={wallet.baseCurrency}>
               {wallet.baseCurrency} ({displayBalance})
             </option>
@@ -182,7 +190,8 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
             type="text"
           />
         </label>
-        <button disabled={isBusy} aria-busy={isBusy}>
+
+        <button disabled={isSendButtenDisabled} aria-busy={isBusy}>
           Send
         </button>
       </form>
