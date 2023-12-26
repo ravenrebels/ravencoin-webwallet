@@ -35,11 +35,11 @@ export function Login() {
   function onSubmit(event) {
     event.preventDefault();
 
-    const field = document.getElementById("mnemonic") as HTMLFormElement;
-    if (!field) {
+    const mnemonicInput = document.getElementById("mnemonic") as HTMLFormElement;
+    if (!mnemonicInput) {
       return null;
     }
-    const value = field.value;
+    const value = mnemonicInput.value.trim();
 
     const isValid = RavencoinKey.isMnemonicValid(value);
 
