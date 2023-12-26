@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 
 import RavencoinKey from "@ravenrebels/ravencoin-key";
 
@@ -32,7 +32,7 @@ export function Login() {
 
     return false;
   }
-  function onSubmit(event) {
+  function onSubmit(event: FormEvent) {
     event.preventDefault();
 
     const mnemonicInput = document.getElementById("mnemonic") as HTMLFormElement;
