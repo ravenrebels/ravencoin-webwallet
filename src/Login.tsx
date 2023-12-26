@@ -1,11 +1,11 @@
-import React, { FormEvent } from "react";
-
 import RavencoinKey from "@ravenrebels/ravencoin-key";
+import React, { FormEvent } from "react";
+import { LightModeToggle } from "./components/LightModeToggle";
+import { setMnemonic } from "./utils";
 
 //For bundler not to optimize/remove RavencoinKey
 console.log("RavencoinKey", !!RavencoinKey);
-import { LightModeToggle } from "./components/LightModeToggle";
-import { getMnemonic, setMnemonic } from "./utils";
+
 export function Login() {
   const [showWords, setShowWords] = React.useState(false);
   const [dialog, setDialog] = React.useState(<></>);
