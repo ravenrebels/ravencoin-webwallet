@@ -44,7 +44,7 @@ export function Login() {
     const isValid = RavencoinKey.isMnemonicValid(value);
 
     if (isValid === false) {
-      alert("The does not seem to be 12 valid words for a Ravencoin wallet");
+      alert("Given input does not seem to be 12 valid words for a Ravencoin wallet");
       setMnemonic(value);
       window.location.reload();
     } else {
