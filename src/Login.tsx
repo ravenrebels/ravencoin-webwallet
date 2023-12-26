@@ -1,11 +1,11 @@
-import React from "react";
-
 import RavencoinKey from "@ravenrebels/ravencoin-key";
+import React, { FormEvent } from "react";
+import { LightModeToggle } from "./components/LightModeToggle";
+import { setMnemonic } from "./utils";
 
 //For bundler not to optimize/remove RavencoinKey
 console.log("RavencoinKey", !!RavencoinKey);
-import { LightModeToggle } from "./components/LightModeToggle";
-import { getMnemonic, setMnemonic } from "./utils";
+
 export function Login() {
   const [showWords, setShowWords] = React.useState(false);
   const [dialog, setDialog] = React.useState(<></>);
@@ -32,19 +32,19 @@ export function Login() {
 
     return false;
   }
-  function onSubmit(event) {
+  function onSubmit(event: FormEvent) {
     event.preventDefault();
 
-    const field = document.getElementById("mnemonic") as HTMLFormElement;
-    if (!field) {
+    const mnemonicInput = document.getElementById("mnemonic") as HTMLFormElement;
+    if (!mnemonicInput) {
       return null;
     }
-    const value = field.value;
+    const value = mnemonicInput.value.trim();
 
     const isValid = RavencoinKey.isMnemonicValid(value);
 
     if (isValid === false) {
-      alert("The does not seem to be 12 valid words for a Ravencoin wallet");
+      alert("Given input does not seem to be 12 valid words for a Ravencoin wallet");
       setMnemonic(value);
       window.location.reload();
     } else {
