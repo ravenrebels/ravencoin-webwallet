@@ -2,7 +2,8 @@ import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 //@ts-ignore
 import logo from "../ravencoin-rvn-logo.png";
-
+//@ts-ignore
+import evrLogo from "../evrmorecoin-evr-logo.png";
 import networkInfo from "./networkInfo";
 
 const imageStyle = {
@@ -32,13 +33,22 @@ export function AssetLink({ wallet, assetName }: LinkToIPFSProps) {
     }
   }, [assetName]);
 
-  if (assetName === wallet.baseCurrency) {
+  if (assetName === wallet.baseCurrency && wallet.baseCurrency === "RVN") {
     return (
       <div>
         <img style={imageStyle} src={logo}></img>
       </div>
     );
   }
+  if (assetName === wallet.baseCurrency && wallet.baseCurrency === "EVR") {
+    return (
+      <div>
+        <img style={imageStyle} src={ evrLogo}></img>
+      </div>
+    );
+  }
+
+
 
   if (assetData && assetData.ipfs_hash) {
     const url = "https://cloudflare-ipfs.com/ipfs/" + assetData.ipfs_hash;
