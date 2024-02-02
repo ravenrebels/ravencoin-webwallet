@@ -8,6 +8,7 @@ import {
 } from "./utils";
 import { Events, triggerEvent } from "./Events";
 import { betterAlert, betterConfirm, betterToast } from "./betterDialog";
+import { formatNumberWith8Decimals } from "./formatNumberWith8Decimals";
 export function Send({
   assets,
   balance,
@@ -158,7 +159,7 @@ function AssetOptions({ wallet, allAssets }: IAssetOptionsProps) {
       return null;
     }
 
-    const balanceDisplay = formatNumber(balance);
+    const balanceDisplay = formatNumberWith8Decimals(balance);
 
     return (
       <option key={assetName} value={assetName}>
@@ -169,14 +170,6 @@ function AssetOptions({ wallet, allAssets }: IAssetOptionsProps) {
 
   return options;
 }
-function formatNumber(num) {
-  const formatted = num.toLocaleString(navigator.language, {
-    minimumFractionDigits: 0, // Do not force decimal places if not needed
-    maximumFractionDigits: 8, // Allow up to 8 decimal places if needed
-  });
-  return formatted;
-}
-
 function useQRReader(
   showQRCode: boolean,
   onResult: (value: string | null) => void

@@ -4,6 +4,7 @@ import { getAssetBalanceIncludingMempool } from "./utils";
 import { AssetName } from "./AssetName";
 
 import networkInfo from "./networkInfo";
+import { formatNumberWith8Decimals } from "./formatNumberWith8Decimals";
 
 const imageStyle = {
   maxWidth: "80px",
@@ -48,7 +49,7 @@ export function Assets({ wallet, assets, mempool }) {
                 <td style={tdStyle}>
                   <LinkToIPFS wallet={wallet} assetName={assetName} />
                 </td>
-                <td style={tdStyle}>{balance.toLocaleString()}</td>
+                <td style={tdStyle}>{formatNumberWith8Decimals(balance)}</td>
               </tr>
             );
           })}
