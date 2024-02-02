@@ -34,68 +34,6 @@ export function Send({
   }
   const qr = useQRReader(showQRCode, onResult);
 
-  const send = async () => {
-    const promise = wallet.createTransaction({
-      toAddress: to,
-      assetName: asset,
-      amount: parseFloat(amount),
-    });
-
-    try {
-      await promise;
-    } catch (e) {
-      betterAlert("Error", "" + e);
-      return;
-    }
-
-    const sendResult = await promise;
-    //Yes template literals combined, to avoid the headache of new lines getting indented
-    const confirmText = `Do you want to send ${amount} ${asset} to 
-${to}?
-
-Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
-    // const c = confirm(confirmText);
-    const c = await betterConfirm("About to send", confirmText);
-    if (c === true) {
-      try {
-        const raw = sendResult.debug.signedTransaction;
-        if (raw) {
-          const promise = wallet.sendRawTransaction(raw);
-          console.log("Send raw transaction promise", promise);
-          promise
-            .then(() => {
-              setTo("");
-              setAmount("");
-              setAsset("");
-              triggerEvent(Events.INFO__TRANSFER_IN_PROCESS);
-              betterToast("✓ Success");
-            })
-            .catch((e) => {
-              const isTxSize = JSON.stringify(e).indexOf("64: tx-size") > -1;
-              if (isTxSize) {
-                betterAlert(
-                  "Error",
-                  "Oops the transaction was to big, try sending a smaller amount"
-                );
-              } else {
-                console.log("Error when broadcasting transaction", e + "", e);
-                betterAlert(
-                  "Error",
-                  "" + e && JSON.stringify(e.error, null, 4)
-                );
-              }
-            });
-        }
-      } catch (e) {
-        console.error(e);
-
-        betterAlert("Error", "" + e && JSON.stringify(e.error, null, 4));
-      }
-    }
-
-    return false;
-  };
-
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     //Validate amount
@@ -106,6 +44,15 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
       );
       return;
     }
+
+    const clearForm = () => {
+      setTo("");
+      setAmount("");
+      setAsset("");
+      triggerEvent(Events.INFO__TRANSFER_IN_PROCESS);
+      betterToast("✓ Success");
+    };
+
     //Validate that "to address" is a valid address
     const validateAddressResponse = await wallet.rpc("validateaddress", [to]);
 
@@ -115,7 +62,7 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
     }
 
     setIsBusy(true);
-    const promise = send();
+    const promise = send({ wallet, to, asset, amount, clearForm });
     promise.catch(() => {
       //Do nothing);
     });
@@ -128,6 +75,22 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
     <AssetOptions wallet={wallet} allAssets={allAssets}></AssetOptions>
   );
 
+  function maxButtonEventHandler(event) {
+    event.preventDefault();
+    const newAmount = allAssets[asset];
+    setAmount(newAmount + "");
+  }
+  function MaxButton() {
+    return (
+      <a
+        href="#"
+        style={{ display: "inline-block", float: "right" }}
+        onClick={maxButtonEventHandler}
+      >
+        Max
+      </a>
+    );
+  }
   const displayBalance =
     balance + getAssetBalanceFromMempool(wallet.baseCurrency, mempool);
   return (
@@ -158,7 +121,7 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
           </select>
         </label>
         <label>
-          Amount
+          Amount <MaxButton />
           <input
             onChange={(event) => setAmount(event.target.value)}
             type="text"
@@ -194,22 +157,26 @@ function AssetOptions({ wallet, allAssets }: IAssetOptionsProps) {
     if (wallet.baseCurrency === assetName) {
       return null;
     }
-    if (balance > 0) {
-      const balanceDisplay = balance.toLocaleString();
-      if (balanceDisplay === "0") {
-        return null;
-      }
-      return (
-        <option key={assetName} value={assetName}>
-          {assetName} - ({balance})
-        </option>
-      );
-    }
-    return null;
+
+    const balanceDisplay = formatNumber(balance);
+
+    return (
+      <option key={assetName} value={assetName}>
+        {assetName} - ({balanceDisplay})
+      </option>
+    ); 
   });
 
   return options;
 }
+function formatNumber(num) {
+  const formatted = num.toLocaleString(navigator.language, {
+    minimumFractionDigits: 0, // Do not force decimal places if not needed
+    maximumFractionDigits: 8, // Allow up to 8 decimal places if needed
+  });
+  return formatted;
+}
+
 function useQRReader(
   showQRCode: boolean,
   onResult: (value: string | null) => void
@@ -260,4 +227,68 @@ function useQRReader(
   }, [showQRCode, mode]);
 
   return qr;
+}
+
+/**
+ * 
+ * Two steps to send
+ * 
+ * ONE, create a transaction and ask the user to confirm and accept the transfer and its fees
+ * TWO, broadcast the actual transaction
+ * 
+ * @returns 
+ */
+async function send({ wallet, to, asset, amount, clearForm }) {
+  const promise = wallet.createTransaction({
+    toAddress: to,
+    assetName: asset,
+    amount: parseFloat(amount),
+  });
+
+  try {
+    await promise;
+  } catch (e) {
+    betterAlert("Error", "" + e);
+    return;
+  }
+
+  const sendResult = await promise;
+  //Yes template literals combined, to avoid the headache of new lines getting indented
+  const confirmText = `Do you want to send ${amount} ${asset} to 
+${to}?
+
+Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
+  // const c = confirm(confirmText);
+  const c = await betterConfirm("About to send", confirmText);
+  if (c === true) {
+    try {
+      const raw = sendResult.debug.signedTransaction;
+      if (raw) {
+        const promise = wallet.sendRawTransaction(raw);
+        console.log("Send raw transaction promise", promise);
+        promise
+          .then(() => {
+            clearForm();
+          })
+          .catch((e) => {
+            const isTxSize = JSON.stringify(e).indexOf("64: tx-size") > -1;
+            if (isTxSize) {
+              betterAlert(
+                "Error",
+                "Oops the transaction was to big, try sending a smaller amount"
+              );
+            } else {
+              console.log("Error when broadcasting transaction", e + "", e);
+              betterAlert("Error", "" + e && JSON.stringify(e.error, null, 4));
+            }
+          });
+      }
+    } catch (e) {
+      console.error(e);
+
+      betterAlert("Error", "" + e && JSON.stringify(e.error, null, 4));
+    }
+  }
+
+  return false;
 }
