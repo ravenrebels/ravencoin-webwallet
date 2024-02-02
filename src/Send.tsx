@@ -79,7 +79,15 @@ export function Send({
   function maxButtonEventHandler(event) {
     event.preventDefault();
     const newAmount = allAssets[asset];
-    setAmount(newAmount + "");
+    const str = "" + newAmount;
+    //Check for exponential notation
+    //The value 1e8 should be displayed to the user as 0.00000001
+
+    if (str.indexOf("e") > -1) {
+      setAmount(newAmount.toFixed(8));
+    } else {
+      setAmount(str);
+    }
   }
   function MaxButton() {
     return (
@@ -159,13 +167,16 @@ function AssetOptions({ wallet, allAssets }: IAssetOptionsProps) {
       return null;
     }
 
+    if (balance === 0) {
+      return null;
+    }
     const balanceDisplay = formatNumberWith8Decimals(balance);
 
     return (
       <option key={assetName} value={assetName}>
         {assetName} - ({balanceDisplay})
       </option>
-    ); 
+    );
   });
 
   return options;
@@ -223,13 +234,13 @@ function useQRReader(
 }
 
 /**
- * 
+ *
  * Two steps to send
- * 
+ *
  * ONE, create a transaction and ask the user to confirm and accept the transfer and its fees
  * TWO, broadcast the actual transaction
- * 
- * @returns 
+ *
+ * @returns
  */
 async function send({ wallet, to, asset, amount, clearForm }) {
   const promise = wallet.createTransaction({
