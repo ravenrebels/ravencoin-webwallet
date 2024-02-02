@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@ravenrebels/ravencoin-history-list": "^1.2.4",
-    "@ravenrebels/ravencoin-jswallet": "^0.7.63",
+    "@ravenrebels/ravencoin-jswallet": "^0.7.64",
     "@ravenrebels/ravencoin-key": "^2.5.2",
     "@ravenrebels/ravencoin-message": "^0.7.0",
     "@types/react": "^18.2.6",
