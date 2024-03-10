@@ -36,7 +36,7 @@ export function Balance({
       )}
       <h1 className="rebel-balance">
         {balanceText} {wallet.baseCurrency}
-        {wallet.baseCurrency === "RVN" && (
+        {dollarValue && (
           <div className="rebel-balance__dollar-value">{dollarValue}</div>
         )}
       </h1>
@@ -49,7 +49,7 @@ function useUSDPrice(wallet: Wallet) {
 
   React.useEffect(() => {
     const isRavencoin = wallet && wallet.baseCurrency === "RVN";
-
+    const isEvrmorecoin = wallet && wallet.baseCurrency === "EVR";
     const work = () => {
       if (isRavencoin === true) {
         const URL =
@@ -59,6 +59,17 @@ function useUSDPrice(wallet: Wallet) {
           .then((obj) => {
             setPrice(parseFloat(obj.price));
           });
+      }
+
+      if (isEvrmorecoin === true) {
+        const URL = "https://api.xeggex.com/api/v2/asset/getbyticker/EVR";
+        fetch(URL)
+          .then((response) => response.json())
+          .then((obj) => {
+            const value = parseFloat(obj.usdValue);
+            setPrice(value);
+          })
+          .catch(console.log);
       }
     };
     const interval = setInterval(work, 60 * 1000);
