@@ -44,11 +44,11 @@ export function Balance({
         {balanceText} {wallet.baseCurrency}
       </h1>
       {dollarValue && (
-        <div className="rebel-balance__value-container">
-          <div className="rebel-balance__base-currency-value">
-            {unitPriceText} each
-          </div>
+        <div className="rebel-balance__value-container">         
           <div className="rebel-balance__dollar-value">{dollarValue} total</div>
+          <div className="rebel-balance__base-currency-value">
+            {unitPriceText} {wallet.baseCurrency}
+          </div>
         </div>
       )}
     </div>
