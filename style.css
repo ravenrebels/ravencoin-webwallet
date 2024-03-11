@@ -79,6 +79,7 @@ body {
 
 .rebel-navigator {
   zoom: 0.8;
+  display:block;
 }
 /* On screens that are 600px or less, set the background color to olive */
 @media screen and (min-width: 576px) {
@@ -120,12 +121,21 @@ body {
 .rebel-balance {
   font-weight: 200;
   text-align: center;
+  margin-bottom: 0;
+}
+.rebel-balance__value-container{
+  margin-bottom: calc(var(--pico-spacing) + var(--pico-spacing) + var(--pico-spacing));
 }
 .rebel-balance__dollar-value {
+  float:left;
+  font-size: 1.2rem;
   font-weight: 200;
-  font-size: 1rem;
 }
-
+.rebel-balance__base-currency-value{
+  float:right;
+  font-size: 1.2rem; 
+  font-weight: 200;
+}
 #newWalletButton {
   margin-bottom: var(--pico-spacing);
 }

@@ -43,6 +43,7 @@ export function Assets({ wallet, assets, mempool }) {
             const tdStyle = {
               paddingBottom: 20,
               paddingTop: 20,
+              paddingLeft:0
             };
             return (
               <tr key={assetName || Math.random()}>

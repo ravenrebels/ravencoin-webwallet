@@ -25,6 +25,12 @@ export function Balance({
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
+  const unitPriceText = price?.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 3, // Adjust the number of decimal places
+    maximumFractionDigits: 6, // You can adjust this as needed
+  });
   return (
     <div>
       {hasPending === true ? (
@@ -36,10 +42,15 @@ export function Balance({
       )}
       <h1 className="rebel-balance">
         {balanceText} {wallet.baseCurrency}
-        {dollarValue && (
-          <div className="rebel-balance__dollar-value">{dollarValue}</div>
-        )}
       </h1>
+      {dollarValue && (
+        <div className="rebel-balance__value-container">
+          <div className="rebel-balance__base-currency-value">
+            {unitPriceText} each
+          </div>
+          <div className="rebel-balance__dollar-value">{dollarValue} total</div>
+        </div>
+      )}
     </div>
   );
 }
