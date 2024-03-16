@@ -29,6 +29,14 @@ let _mnemonic =
 type ChainType = "rvn" | "rvn-test" | "evr";
 
 const initMnemonic = getMnemonic();
+
+//Set Dark or Light mode if store.
+const theme = localStorage.getItem("data-theme");
+if (theme) {
+  const element = document.querySelector("html");
+  element?.setAttribute("data-theme", theme);
+}
+
 function App() {
   const [currentRoute, setCurrentRoute] = React.useState(Routes.HOME);
 

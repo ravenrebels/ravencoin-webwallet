@@ -12,6 +12,7 @@ export function LightModeToggle() {
   const onChange = function (event: SyntheticEvent) {
     const text = isDarkMode === true ? "light" : "dark";
     element?.setAttribute("data-theme", text);
+    localStorage.setItem("data-theme", text);
     setIsDarkMode(!isDarkMode);
   };
   return (
