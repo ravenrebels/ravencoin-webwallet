@@ -1,6 +1,6 @@
 {
   "name": "rebel-wallet",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Web wallet for Ravencoin",
   "private": true,
   "scripts": {
