@@ -14,12 +14,12 @@ export function AssetName({ name }) {
 
       if (isLast === false) {
         result.push(
-          <span key="part1">
+          <span key={"part1_" + name + s}>
             {s}/<wbr></wbr>
           </span>
         );
       } else {
-        result.push(<span key="part2">{s}</span>);
+        result.push(<span key={"part2_" + name + s}>{s}</span>);
       }
     }
 

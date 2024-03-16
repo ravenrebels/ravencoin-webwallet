@@ -45,7 +45,7 @@ const evrmoreMainnet: INetworkInfo = {
   },
 };
 
-interface INetworks {
+export interface INetworks {
   rvn: INetworkInfo;
   "rvn-test": INetworkInfo;
   evr: INetworkInfo;

@@ -10,7 +10,7 @@ import {
   IconSign,
   IconSweep,
 } from "./icons";
-import networkInfo from "./networkInfo";
+import networkInfo, { INetworks } from "./networkInfo";
 export function Navigator({
   balance,
   wallet,
@@ -82,9 +82,8 @@ export function Navigator({
           />
         </ul>
       </nav>
-
       <small>
-        <i>{networkDisplayName}</i>
+        <NetworkSelect wallet={wallet} networks={networkInfo}></NetworkSelect>
       </small>
     </article>
   );
@@ -96,6 +95,37 @@ interface ILinkProps {
   setRoute: any;
   title: string;
 }
+
+type NetworkInfoProps = {
+  wallet: Wallet;
+  networks: INetworks;
+};
+
+function NetworkSelect({ wallet, networks }: NetworkInfoProps) {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newNetwork = event.target.value;
+
+    // Update the URL and reload the page with the new network query parameter
+    const newUrl = `${window.location.pathname}?network=${newNetwork}`;
+    window.location.href = newUrl;
+  };
+
+  const options = Object.keys(networks).map((network: string) => {
+    const info = networks[network];
+    return (
+      <option key={network} value={network}>
+        {info.displayName}
+      </option>
+    );
+  });
+
+  return (
+    <select value={wallet.network} onChange={handleChange}>
+      {options}
+    </select>
+  );
+}
+
 function Link({ currentRoute, newRoute, setRoute, title }: ILinkProps) {
   const isCurrent = currentRoute === newRoute;
   const classes =

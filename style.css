@@ -79,9 +79,9 @@ body {
 
 .rebel-navigator {
   zoom: 0.8;
-  display:block;
+  display: block;
 }
-/* On screens that are 600px or less, set the background color to olive */
+
 @media screen and (min-width: 576px) {
   .rebel-navigator {
     zoom: 1.1;
@@ -91,14 +91,28 @@ body {
   padding-bottom: 30px;
 }
 .rebel-navigator__list {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* Creates a 3-column layout for mobile */
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  list-style-type: none; /* Remove list bullets */
 }
 .rebel-navigator__list-item {
-  list-style: none;
-  text-align: center;
+  padding: 20px;
+  box-sizing: border-box; /* Include padding and border in the element's width */
+}
+/* Media query for desktop devices */
+@media (min-width: 769px) {
+  .rebel-navigator__list {
+    grid-template-columns: repeat(
+      6,
+      1fr
+    ); /* Adjust to a single row of 6 columns on desktop */
+  }
 }
 
 .rebel-navigator__list-item--active a {
@@ -123,18 +137,21 @@ body {
   text-align: center;
   margin-bottom: 0;
 }
-.rebel-balance__value-container{
-  margin-bottom: calc(var(--pico-spacing) + var(--pico-spacing) + var(--pico-spacing));
+.rebel-balance__value-container {
+  margin-bottom: calc(var(--pico-spacing) );
+  text-align: center;
 }
 .rebel-balance__dollar-value {
-  float:left;
   font-size: 1.2rem;
   font-weight: 200;
+  display: inline-block;
 }
-.rebel-balance__base-currency-value{
-  float:right;
-  font-size: 1.2rem; 
+.rebel-balance__base-currency-value {
+  font-size: 1.2rem;
   font-weight: 200;
+  display: inline-block;
+
+  margin-left: 30px;
 }
 #newWalletButton {
   margin-bottom: var(--pico-spacing);
