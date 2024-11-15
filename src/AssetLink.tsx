@@ -51,7 +51,7 @@ export function AssetLink({ wallet, assetName }: LinkToIPFSProps) {
 
 
   if (assetData && assetData.ipfs_hash) {
-    const url = "https://cloudflare-ipfs.com/ipfs/" + assetData.ipfs_hash;
+    const url = "https://gateway.pinata.cloud/ipfs/" + assetData.ipfs_hash;
 
     const imageURL = networkInfo[wallet.network].getThumbnailURL(assetName);
 
