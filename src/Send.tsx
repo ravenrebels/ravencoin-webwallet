@@ -279,7 +279,7 @@ Transaction fee: ${sendResult.debug.fee.toFixed(4)} ${wallet.baseCurrency}`;
             if (isTxSize) {
               betterAlert(
                 "Error",
-                "Oops the transaction was to big, try sending a smaller amount"
+                "Oops the transaction was too big, try sending a smaller amount"
               );
             } else {
               console.log("Error when broadcasting transaction", e + "", e);

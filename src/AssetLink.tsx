@@ -1,9 +1,9 @@
 import React from "react";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
-//@ts-ignore
-import logo from "../ravencoin-rvn-logo.png";
-//@ts-ignore
-import evrLogo from "../evrmorecoin-evr-logo.png";
+
+const rvnLogo = new URL("../ravencoin-rvn-logo.png", import.meta.url);
+const evrLogo = new URL("../evrmorecoin-evr-logo.png", import.meta.url);
+
 import networkInfo from "./networkInfo";
 
 const imageStyle = {
@@ -36,19 +36,17 @@ export function AssetLink({ wallet, assetName }: LinkToIPFSProps) {
   if (assetName === wallet.baseCurrency && wallet.baseCurrency === "RVN") {
     return (
       <div>
-        <img style={imageStyle} src={logo}></img>
+        <img style={imageStyle} src={rvnLogo.href}></img>
       </div>
     );
   }
   if (assetName === wallet.baseCurrency && wallet.baseCurrency === "EVR") {
     return (
       <div>
-        <img style={imageStyle} src={ evrLogo}></img>
+        <img style={imageStyle} src={evrLogo.href}></img>
       </div>
     );
   }
-
-
 
   if (assetData && assetData.ipfs_hash) {
     const url = "https://gateway.pinata.cloud/ipfs/" + assetData.ipfs_hash;
