@@ -19,15 +19,15 @@
   "license": "MIT",
   "dependencies": {
     "@ravenrebels/ravencoin-history-list": "^1.2.4",
-    "@ravenrebels/ravencoin-jswallet": "0.12.0",
-    "@ravenrebels/ravencoin-key": "^2.5.2",
+    "@ravenrebels/ravencoin-jswallet": "^0.12.4",
+    "@ravenrebels/ravencoin-key": "^3.0.3",
     "@ravenrebels/ravencoin-message": "^0.7.0",
-    "@types/react": "^18.2.6",
-    "@types/react-dom": "^18.2.4",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
     "crypto-js": "^4.2.0",
-    "parcel": "^2.13.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "parcel": "^2.16.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-qr-reader": "^3.0.0-beta-1"
   },
   "overrides": {
@@ -37,13 +37,15 @@
     }
   },
   "devDependencies": {
-    "@parcel/packager-raw-url": "^2.14.4",
-    "@parcel/transformer-webmanifest": "^2.14.4",
+    "@parcel/packager-raw-url": "^2.16.4",
+    "@parcel/transformer-webmanifest": "^2.16.4",
     "assert": "^2.1.0",
     "buffer": "^6.0.3",
-    "crypto-browserify": "^3.12.0",
+    "crypto-browserify": "^3.12.1",
     "events": "^3.3.0",
     "process": "^0.11.10",
-    "stream-browserify": "^3.0.0"
+    "stream-browserify": "^3.0.0",
+    "string_decoder": "^1.3.0",
+    "vm-browserify": "^1.1.2"
   }
 }
