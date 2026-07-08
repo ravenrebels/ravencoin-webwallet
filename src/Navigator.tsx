@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { Routes } from "./Routes";
+import { walletBrand } from "./brandConfig";
 import { LightModeToggle } from "./components/LightModeToggle";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 import {
@@ -12,7 +13,7 @@ import {
 } from "./icons";
 import networkInfo, { INetworks } from "./networkInfo";
 export function Navigator({
-  balance,
+balance,
   wallet,
   currentRoute,
   setRoute,
@@ -36,7 +37,7 @@ export function Navigator({
           return false;
         }}
       >
-        <h5 className="rebel-headline">Rebel wallet</h5>
+        <h5 className="rebel-headline">{walletBrand.name}</h5>
       </a>
 
       {balance}

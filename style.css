@@ -195,3 +195,710 @@ body {
     flex: 2;
   }
 }
+
+/* DYOV/RR community wallet branding */
+:root {
+  --rr-brand-primary: #f59e0b;
+  --rr-brand-accent: #ff7a18;
+}
+
+body {
+  background: linear-gradient(135deg, var(--rr-brand-primary, #f59e0b), var(--rr-brand-accent, #1b0827)) !important;
+}
+
+.rebel-headline {
+  color: var(--rr-brand-primary, #f59e0b) !important;
+}
+
+button,
+[role="button"],
+input[type="submit"] {
+  border-radius: 999px;
+}
+
+.dyov-rr-powered {
+  color: #777;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.dyov-rr-login-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.dyov-rr-login-logo {
+  width: 74px;
+  height: 74px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rr-brand-primary, #f59e0b);
+  color: #111;
+  font-size: 34px;
+  font-weight: 900;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,.22);
+}
+
+.dyov-rr-login-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dyov-rr-login-brand h3 {
+  margin: 0;
+}
+
+.dyov-rr-login-brand p {
+  margin: 4px 0 0;
+  color: #666;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.dyov-rr-assets {
+  overflow: hidden;
+}
+
+.dyov-rr-assets-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.dyov-rr-assets-head h5 {
+  margin-bottom: 2px;
+}
+
+.dyov-rr-assets-head small {
+  color: #777;
+  font-weight: 700;
+}
+
+.dyov-rr-assets-head strong {
+  min-width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245,158,11,.15);
+  color: var(--rr-brand-primary, #f59e0b);
+}
+
+.dyov-rr-asset-tree {
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.dyov-rr-tree-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.dyov-rr-tree-row.root {
+  background: rgba(245,158,11,.09);
+}
+
+.dyov-rr-tree-row:hover {
+  background: rgba(245,158,11,.07);
+}
+
+.dyov-rr-tree-toggle {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  padding: 0;
+  border: 0;
+  background: rgba(0,0,0,.07);
+  color: inherit;
+  font-weight: 900;
+}
+
+.dyov-rr-tree-spacer {
+  width: 28px;
+  text-align: center;
+  color: var(--rr-brand-primary, #f59e0b);
+}
+
+.dyov-rr-tree-folder {
+  width: 20px;
+}
+
+.dyov-rr-tree-name {
+  min-width: 0;
+  flex: 1;
+  font-weight: 800;
+}
+
+.dyov-rr-tree-name strong {
+  word-break: break-word;
+}
+
+.dyov-rr-tree-balance {
+  margin-left: auto;
+  color: #777;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.dyov-rr-asset-link {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  gap: 6px;
+}
+
+.dyov-rr-asset-placeholder {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--rr-brand-primary, #f59e0b);
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+.dyov-rr-tx-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 12px 0;
+  color: #777;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.dyov-rr-tx-line span:before {
+  content: "●";
+  color: #20c878;
+  margin-right: 7px;
+}
+
+.dyov-rr-tx-line button,
+.dyov-rr-promo button,
+.dyov-rr-tx-row button {
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: rgba(0,0,0,.08);
+  color: inherit;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.dyov-rr-tx-panel {
+  margin: 0 0 12px;
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.035);
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+.dyov-rr-tx-row {
+  display: grid;
+  grid-template-columns: 90px minmax(0,1fr) 110px 70px;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 4px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  font-size: 12px;
+}
+
+.dyov-rr-tx-row:last-child {
+  border-bottom: 0;
+}
+
+.dyov-rr-tx-row strong {
+  color: #20a866;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.dyov-rr-tx-row span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dyov-rr-tx-row code {
+  background: transparent;
+  color: #777;
+  font-size: 11px;
+  padding: 0;
+}
+
+.dyov-rr-promo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 12px 0;
+  padding: 13px 14px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(245,158,11,.20), rgba(0,0,0,.035));
+  border: 1px solid rgba(245,158,11,.28);
+}
+
+.dyov-rr-promo strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.dyov-rr-promo span {
+  color: #666;
+  font-size: 13px;
+}
+
+.dyov-rr-promo-admin {
+  margin: -4px 0 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px dashed rgba(245,158,11,.45);
+  background: rgba(245,158,11,.06);
+}
+
+.dyov-rr-promo-admin p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 13px;
+}
+
+@media (max-width: 760px) {
+  .dyov-rr-tx-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dyov-rr-promo {
+    display: block;
+  }
+
+  .dyov-rr-promo button {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .dyov-rr-tree-row {
+    align-items: flex-start;
+  }
+
+  .dyov-rr-tree-balance {
+    font-size: 12px;
+  }
+}
+
+
+/* DYOV/RR brand banner + promo admin config display */
+.dyov-rr-wallet-banner {
+  min-height: 128px;
+  border-radius: 18px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 12px 0;
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 14px 36px rgba(0,0,0,.16);
+}
+
+.dyov-rr-promo-admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.dyov-rr-promo-admin-grid div {
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(0,0,0,.05);
+  min-width: 0;
+}
+
+.dyov-rr-promo-admin-grid dt {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.dyov-rr-promo-admin-grid dd {
+  margin: 3px 0 0;
+  font-size: 12px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .dyov-rr-promo-admin-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* DYOV/RR local wallet brand hero */
+.dyov-rr-brand-hero {
+  min-height: 190px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255,255,255,.20), transparent 30%),
+    linear-gradient(135deg, var(--rr-brand-primary, #f59e0b), var(--rr-brand-accent, #111827));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 12px 0 14px;
+  padding: 20px;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 18px 46px rgba(0,0,0,.18);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.dyov-rr-brand-hero-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dyov-rr-brand-hero-logo {
+  width: 74px;
+  height: 74px;
+  border-radius: 18px;
+  background: var(--rr-brand-primary, #f59e0b);
+  color: #07111f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  font-weight: 900;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,.24);
+  flex: 0 0 auto;
+}
+
+.dyov-rr-brand-hero-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dyov-rr-brand-hero-copy strong {
+  display: block;
+  font-size: 28px;
+  line-height: 1.05;
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+}
+
+.dyov-rr-brand-hero-copy span {
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(255,255,255,.9);
+}
+
+.dyov-rr-brand-hero-ctas {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dyov-rr-brand-hero-ctas a,
+.dyov-rr-brand-hero-ctas span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(2,6,23,.82);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.18);
+}
+
+@media (max-width: 760px) {
+  .dyov-rr-brand-hero {
+    min-height: 160px;
+    padding: 16px;
+  }
+
+  .dyov-rr-brand-hero-logo {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+  }
+
+  .dyov-rr-brand-hero-copy strong {
+    font-size: 22px;
+  }
+}
+
+/* DYOV/RR show brand images as drawn */
+.dyov-rr-brand-hero {
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: #0f172a;
+}
+
+.dyov-rr-promo {
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: #0f172a;
+}
+
+@media (max-width: 760px) {
+  .dyov-rr-brand-hero,
+  .dyov-rr-promo {
+    background-size: cover !important;
+  }
+}
+
+
+/* DYOV/RR final desktop brand + promo layout v1
+   Final local test cleanup before merge:
+   - desktop hero = left info panel + right banner image
+   - desktop promo = left text + right image
+   - mobile keeps compact stacked behavior
+*/
+
+@media (min-width: 900px) {
+  .dyov-rr-brand-hero {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: 430px 1fr !important;
+    grid-template-rows: 1fr auto !important;
+    min-height: 205px !important;
+    max-height: 235px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+    background-size: auto 100% !important;
+    background-position: right center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .dyov-rr-brand-hero::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 auto 0 0 !important;
+    width: 430px !important;
+    background: rgba(8, 13, 28, .96) !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .dyov-rr-brand-hero::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(
+      90deg,
+      rgba(8, 13, 28, .78) 0%,
+      rgba(8, 13, 28, .42) 35%,
+      rgba(8, 13, 28, .10) 70%,
+      rgba(8, 13, 28, .26) 100%
+    ) !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .dyov-rr-brand-hero-row {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    position: relative !important;
+    z-index: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    width: 390px !important;
+    max-width: 390px !important;
+    margin: 30px 0 0 28px !important;
+    padding: 0 !important;
+    text-align: left !important;
+    overflow: visible !important;
+  }
+
+  .dyov-rr-brand-hero-logo {
+    flex: 0 0 74px !important;
+    width: 74px !important;
+    height: 74px !important;
+    margin: 0 !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+  }
+
+  .dyov-rr-brand-hero-logo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .dyov-rr-brand-hero-copy {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: 285px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+
+  .dyov-rr-brand-hero-copy strong,
+  .dyov-rr-brand-hero-copy h1,
+  .dyov-rr-brand-hero-copy h2,
+  .dyov-rr-brand-hero-copy h3 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 285px !important;
+    margin: 0 0 7px !important;
+    padding: 0 !important;
+    font-size: 25px !important;
+    line-height: 1.08 !important;
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    text-align: left !important;
+  }
+
+  .dyov-rr-brand-hero-copy span,
+  .dyov-rr-brand-hero-copy p {
+    display: block !important;
+    max-width: 285px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+    text-align: left !important;
+  }
+
+  .dyov-rr-brand-hero-ctas {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: 390px !important;
+    max-width: 390px !important;
+    margin: 0 0 28px 28px !important;
+    padding: 0 !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+  }
+
+  .dyov-rr-brand-hero-ctas a,
+  .dyov-rr-brand-hero-ctas button {
+    pointer-events: auto !important;
+    min-width: 112px !important;
+    justify-content: center !important;
+  }
+
+  .dyov-rr-promo {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: minmax(360px, 1fr) 280px !important;
+    align-items: stretch !important;
+    min-height: 92px !important;
+    max-height: 118px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    border-radius: 16px !important;
+    background-repeat: no-repeat !important;
+    background-size: auto 100% !important;
+    background-position: right center !important;
+  }
+
+  .dyov-rr-promo::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(
+      90deg,
+      rgba(8, 13, 28, .96) 0%,
+      rgba(8, 13, 28, .92) 55%,
+      rgba(8, 13, 28, .38) 78%,
+      rgba(8, 13, 28, .15) 100%
+    ) !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .dyov-rr-promo > * {
+    position: relative !important;
+    z-index: 1 !important;
+    grid-column: 1 !important;
+  }
+
+  .dyov-rr-promo strong,
+  .dyov-rr-promo h3,
+  .dyov-rr-promo h4 {
+    display: block !important;
+    margin: 22px 24px 6px !important;
+    font-size: 18px !important;
+    line-height: 1.1 !important;
+  }
+
+  .dyov-rr-promo span,
+  .dyov-rr-promo p {
+    display: block !important;
+    margin: 0 24px 22px !important;
+    max-width: 520px !important;
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+  }
+
+  .dyov-rr-wallet-shell,
+  .dyov-rr-assets-panel,
+  .dyov-rr-content,
+  .dyov-rr-main {
+    max-width: 1180px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .dyov-rr-brand-hero {
+    grid-template-columns: 430px 1fr !important;
+    min-height: 205px !important;
+  }
+
+  .dyov-rr-promo {
+    grid-template-columns: minmax(420px, 1fr) 320px !important;
+  }
+}
+
+@media (max-width: 899px) {
+  .dyov-rr-brand-hero {
+    min-height: 136px !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .dyov-rr-promo {
+    min-height: 86px !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+}
+

@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "type": "community-wallet-brand-pack",
+  "poweredBy": "RVN and Raven Rebels",
+  "mainAsset": "MECO_BETA",
+  "brandLaunchAsset": "MECO_BETA/WALLET",
+  "promoConfigRef": "https://dyov.io/dyov-promo-configs/current-promo.php",
+  "brand": {
+    "name": "meCo helps understand tkens",
+    "promoConfigRef": "https://dyov.io/dyov-promo-configs/current-promo.php",
+    "logoRef": "QmR8M1hEK7x7KwKBaso448bVND9vUuTpxzcy6LFMFUNWiQ",
+    "bannerRef": "QmR8M1hEK7x7KwKBaso448bVND9vUuTpxzcy6LFMFUNWiQ",
+    "primaryColor": "#0af5c6",
+    "accentColor": "#ae8937",
+    "promo": {
+      "active": true,
+      "title": "launch promo",
+      "message": "this is dynamic",
+      "graphicRef": "QmR8M1hEK7x7KwKBaso448bVND9vUuTpxzcy6LFMFUNWiQ",
+      "overlayColor": "#000000",
+      "textColor": "#ffffff",
+      "noTint": false,
+      "showTextOverlay": true
+    },
+    "ctas": [
+      {
+        "label": "Home Page",
+        "url": "https://dyov.io/setting/invitation_links"
+      },
+      {
+        "label": "Marketplace",
+        "url": "https://dyov.io/my-products"
+      }
+    ]
+  },
+  "walletPreview": {
+    "buttons": [
+      "Home",
+      "Receive",
+      "Send",
+      "Sign",
+      "Sweep",
+      "History"
+    ],
+    "backendAnnouncement": "3 incoming transactions since last opened",
+    "promoBulletin": true,
+    "promoAdminControl": true,
+    "promoGraphic": true,
+    "assetView": "collapsible_tree",
+    "txSinceLastOpened": [
+      {
+        "direction": "incoming",
+        "amount": "+2500",
+        "asset": "MECO_BETA/REWARDS/POINTS",
+        "txid": "9a31b7e0f204",
+        "label": "Reward points",
+        "timeLabel": "2 min ago"
+      },
+      {
+        "direction": "incoming",
+        "amount": "+1",
+        "asset": "MECO_BETA/REWARDS/VIP",
+        "txid": "7c4289d3a91d",
+        "label": "VIP reward",
+        "timeLabel": "1 hr ago"
+      },
+      {
+        "direction": "incoming",
+        "amount": "+1",
+        "asset": "MECO_BETA/WALLET",
+        "txid": "2bd0419988ef",
+        "label": "Brand launch asset",
+        "timeLabel": "last login"
+      }
+    ]
+  },
+  "assetTree": {
+    "root": "MECO_BETA",
+    "brandLaunchAsset": "MECO_BETA/WALLET",
+    "sampleChildren": [
+      "MECO_BETA/REWARDS",
+      "MECO_BETA/REWARDS/POINTS",
+      "MECO_BETA/REWARDS/VIP",
+      "MECO_BETA/SWAPS",
+      "MECO_BETA/SWAPS/CREDITS",
+      "MECO_BETA/ACCESS",
+      "MECO_BETA/BADGES",
+      "MECO_BETA/WALLET"
+    ]
+  }
+}
