@@ -106,9 +106,10 @@ function NetworkSelect({ wallet, networks }: NetworkInfoProps) {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newNetwork = event.target.value;
 
-    // Update the URL and reload the page with the new network query parameter
-    const newUrl = `${window.location.pathname}?network=${newNetwork}`;
-    window.location.href = newUrl;
+    // Preserve brand and other launch parameters while changing networks.
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set("network", newNetwork);
+    window.location.href = newUrl.toString();
   };
 
   const options = Object.keys(networks).map((network: string) => {

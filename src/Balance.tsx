@@ -66,9 +66,26 @@ function useUSDPrice(wallet: Wallet) {
         const URL =
           "https://api1.binance.com/api/v3/ticker/price?symbol=RVNUSDT";
         fetch(URL)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `RVN price request failed with HTTP ${response.status}`
+              );
+            }
+
+            return response.json();
+          })
           .then((obj) => {
-            setPrice(parseFloat(obj.price));
+            const nextPrice = parseFloat(obj.price);
+
+            if (Number.isFinite(nextPrice)) {
+              setPrice(nextPrice);
+            }
+          })
+          .catch((error) => {
+            // Price conversion is optional. A blocked or unavailable
+            // third-party API must never stop the wallet from loading.
+            console.warn("Unable to load RVN market price:", error);
           });
       }
 

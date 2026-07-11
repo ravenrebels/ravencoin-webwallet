@@ -22,6 +22,7 @@ import { useBlockCount } from "./hooks/useBlockCount";
 import { useBalance } from "./hooks/useBalance";
 import { useAssets } from "./hooks/useAssets";
 import { useReceiveAddress } from "./hooks/useReceiveAddress";
+import { loadWalletBrandFromUrl } from "./brandConfig";
 
 let _mnemonic =
   "sight rate burger maid melody slogan attitude gas account sick awful hammer";
@@ -149,7 +150,22 @@ function App() {
   );
 }
 
-//Add app to the DOM
-const container = document.getElementById("app");
-const root = createRoot(container!);
-root.render(<App />);
+// Load an optional community brand before the first React render.
+// The embedded brand remains the safe fallback if the request fails.
+async function bootstrap() {
+  await loadWalletBrandFromUrl();
+
+  const container = document.getElementById("app");
+  const root = createRoot(container!);
+
+  root.render(<App />);
+}
+
+bootstrap().catch((error) => {
+  console.error("RR wallet bootstrap failed:", error);
+
+  const container = document.getElementById("app");
+  const root = createRoot(container!);
+
+  root.render(<App />);
+});
