@@ -8,7 +8,7 @@ import { walletBrand } from "./brandConfig";
 console.log("RavencoinKey", !!RavencoinKey);
 
 export function Login() {
-const [showWords, setShowWords] = React.useState(false);
+  const [showWords, setShowWords] = React.useState(false);
   const [dialog, setDialog] = React.useState(<></>);
 
   function showDialog(title: string, text: string) {

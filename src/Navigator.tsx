@@ -13,7 +13,7 @@ import {
 } from "./icons";
 import networkInfo, { INetworks } from "./networkInfo";
 export function Navigator({
-balance,
+  balance,
   wallet,
   currentRoute,
   setRoute,

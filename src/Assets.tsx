@@ -125,10 +125,11 @@ function normalizeRuntimePromo(raw: any) {
     "";
 
   const graphicUrl =
-    source.graphicUrl ||
-    source.imageUrl ||
-    mediaUrl(graphicRef) ||
-    "";
+    mediaUrl(
+      source.graphicUrl ||
+      source.imageUrl ||
+      graphicRef
+    ) || "";
 
   return {
     ...base,
@@ -165,12 +166,11 @@ export function Assets({ wallet, assets, mempool }) {
         const nextPromo = normalizeRuntimePromo(data);
         setActivePromo(nextPromo);
       })
-      .catch((error) => {
+      .catch(() => {
         setActivePromo(walletBrand.promo);
       });
   }, []);
   const [txOpen, setTxOpen] = React.useState(false);
-  const [promoAdminOpen, setPromoAdminOpen] = React.useState(false);
 
   const filteredAssets: Record<string, number> = {};
 
@@ -401,6 +401,7 @@ function LinkToIPFS({ wallet, assetName }: LinkToIPFSProps) {
       <a
         href={url}
         target="asset"
+        rel="noopener noreferrer"
         className="dyov-rr-asset-link"
         style={{ textDecoration: "none", color: "var(--pico-contrast)" }}
       >
