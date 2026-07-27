@@ -1,0 +1,13 @@
+{
+  "active": true,
+  "title": "Community Wallet",
+  "message": "Brand your wallet and add promotion announcements",
+  "graphicRef": "QmeCDcmPr7KXkYBVFm71vfNM1PbpUAKVXhJFyU4kGQtfuS",
+  "overlayColor": "#000000",
+  "textColor": "#ffffff",
+  "noTint": false,
+  "showTextOverlay": true,
+  "ctaLabel": "Home Page",
+  "ctaUrl": "https://dyov.io/setting/invitation_links",
+  "updatedAt": "2026-07-07T00:37:23.362Z"
+}

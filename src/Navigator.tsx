@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { Routes } from "./Routes";
+import { walletBrand } from "./brandConfig";
 import { LightModeToggle } from "./components/LightModeToggle";
 import { Wallet } from "@ravenrebels/ravencoin-jswallet";
 import {
@@ -36,7 +37,7 @@ export function Navigator({
           return false;
         }}
       >
-        <h5 className="rebel-headline">Rebel wallet</h5>
+        <h5 className="rebel-headline">{walletBrand.name}</h5>
       </a>
 
       {balance}
@@ -105,9 +106,10 @@ function NetworkSelect({ wallet, networks }: NetworkInfoProps) {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newNetwork = event.target.value;
 
-    // Update the URL and reload the page with the new network query parameter
-    const newUrl = `${window.location.pathname}?network=${newNetwork}`;
-    window.location.href = newUrl;
+    // Preserve brand and other launch parameters while changing networks.
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set("network", newNetwork);
+    window.location.href = newUrl.toString();
   };
 
   const options = Object.keys(networks).map((network: string) => {

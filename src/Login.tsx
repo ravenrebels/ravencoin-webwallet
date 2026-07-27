@@ -2,6 +2,7 @@ import RavencoinKey from "@ravenrebels/ravencoin-key";
 import React, { FormEvent } from "react";
 import { LightModeToggle } from "./components/LightModeToggle";
 import { setMnemonic } from "./utils";
+import { walletBrand } from "./brandConfig";
 
 //For bundler not to optimize/remove RavencoinKey
 console.log("RavencoinKey", !!RavencoinKey);
@@ -59,7 +60,16 @@ export function Login() {
     <article>
       <LightModeToggle />
       {dialog}
-      <h1 className="rebel-headline">Sign in</h1>
+      <div className="dyov-rr-login-brand">
+          <div className="dyov-rr-login-logo">
+            {walletBrand.logoUrl ? <img src={walletBrand.logoUrl} alt="" /> : walletBrand.name.charAt(0)}
+          </div>
+          <div>
+            <h3 className="rebel-headline">{walletBrand.name}</h3>
+            <p>{walletBrand.poweredBy}</p>
+          </div>
+        </div>
+        <h5>Sign in</h5>
       <p>
         This web app only stores your 12 words temporarily in memory, and the
         information is lost when you sign out or clear the web browser's cache.
