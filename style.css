@@ -2,37 +2,11 @@ html,
 body {
   min-height: 100vh;
 }
-@keyframes taadaa {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 body {
-  /*
-  background: linear-gradient(
-    112.1deg,
-    rgb(32, 38, 57) 11.4%,
-    rgb(63, 76, 119) 70.2%
-  );
-  */
-  /* background: linear-gradient(112.1deg, #2e3e80.4%, #f15b22 70.2%); */
   background-color: #000;
   background-image: linear-gradient(147deg, #923cb5 0%, #000000 74%);
 }
-/*
-:root {
-  --font-family: "Quicksand", sans-serif !important;
-}
-*/
-#loading {
-  animation: taadaa 5s infinite;
-}
+
 .rebel-headline {
   background: linear-gradient(hotpink, white);
   -webkit-background-clip: text;

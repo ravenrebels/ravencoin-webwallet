@@ -43,8 +43,30 @@ function App() {
   const [mnemonic] = React.useState(initMnemonic);
 
   const [wallet, setWallet] = React.useState<null | Wallet>(null);
+  const [error, setError] = React.useState<string | null>(null);
 
-  const blockCount = useBlockCount(wallet);
+  const hasLoadedRef = React.useRef(false);
+
+  const blockCount = useBlockCount(wallet, (err) => {
+    console.log("RPC Error:", err);
+    if (!hasLoadedRef.current) {
+      setError("We are closed for maintenance, please check back later.");
+    }
+  });
+
+  if (wallet && blockCount > 0) {
+    hasLoadedRef.current = true;
+  }
+
+  // Timeout fall-back if loading takes too long
+  React.useEffect(() => {
+    if (wallet && blockCount > 0) return;
+    const timer = setTimeout(() => {
+      setError("We are closed for maintenance, please check back later.");
+    }, 8000);
+    return () => clearTimeout(timer);
+  }, [wallet, blockCount]);
+
   const receiveAddress = useReceiveAddress(wallet, blockCount);
   const balance = useBalance(wallet, blockCount);
 
@@ -79,11 +101,21 @@ function App() {
       minAmountOfAddresses,
       mnemonic,
       network,
-    }).then(setWallet);
+    })
+      .then(setWallet)
+      .catch((err) => {
+        console.log("Initialization Error:", err);
+        if (!hasLoadedRef.current) {
+          setError("We are closed for maintenance, please check back later.");
+        }
+      });
   }, [mnemonic]);
 
   if (!mnemonic) {
     return <Login />;
+  }
+  if (error) {
+    return <Loader error={error} />;
   }
   if (!wallet || blockCount === 0) {
     return <Loader />;

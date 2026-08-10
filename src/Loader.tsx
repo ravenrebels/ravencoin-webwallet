@@ -1,12 +1,21 @@
 import React from "react";
-const imageUrl = new URL("../ravencoin-rvn-logo.png", import.meta.url);
 
-export function Loader() {
+export function Loader({ error }: { error?: string }) {
   return (
     <main className="container">
-      <article id="loading">
-        <h3 className="rebel-headline">Rebel wallet</h3>
-        <img src={imageUrl.href}></img>
+      <article style={{ textAlign: "center", padding: "3rem" }}>
+        <h3 className="rebel-headline" style={{ marginBottom: "2rem" }}>Rebel wallet</h3>
+        {error ? (
+          <div style={{ color: "var(--pico-del-color)", marginTop: "1rem" }}>
+            <h4>Could not load the page</h4>
+            <p>{error}</p>
+          </div>
+        ) : (
+          <div style={{ marginTop: "2rem" }}>
+            <span aria-busy="true" style={{ display: "inline-block", transform: "scale(1.5)" }}></span>
+            <p style={{ marginTop: "1.5rem", color: "var(--pico-muted-color)" }}>Loading wallet...</p>
+          </div>
+        )}
       </article>
     </main>
   );
