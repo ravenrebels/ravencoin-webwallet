@@ -1,4 +1,5 @@
 import React from "react";
+import { NetworkStatus } from "./NetworkStatus";
 
 export function Loader({ error }: { error?: string }) {
   return (
@@ -9,6 +10,9 @@ export function Loader({ error }: { error?: string }) {
           <div style={{ color: "var(--pico-del-color)", marginTop: "1rem" }}>
             <h4>Could not load the page</h4>
             <p>{error}</p>
+            <div style={{ color: "var(--pico-color)" }}>
+              <NetworkStatus />
+            </div>
           </div>
         ) : (
           <div style={{ marginTop: "2rem" }}>
