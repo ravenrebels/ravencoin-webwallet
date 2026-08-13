@@ -50,7 +50,7 @@ function App() {
   const blockCount = useBlockCount(wallet, (err) => {
     console.log("RPC Error:", err);
     if (!hasLoadedRef.current) {
-      setError("We are closed for maintenance, please check back later.");
+      setError("Could not connect to the network.");
     }
   });
 
@@ -62,7 +62,7 @@ function App() {
   React.useEffect(() => {
     if (wallet && blockCount > 0) return;
     const timer = setTimeout(() => {
-      setError("We are closed for maintenance, please check back later.");
+      setError("Could not connect to the network.");
     }, 8000);
     return () => clearTimeout(timer);
   }, [wallet, blockCount]);
@@ -106,7 +106,7 @@ function App() {
       .catch((err) => {
         console.log("Initialization Error:", err);
         if (!hasLoadedRef.current) {
-          setError("We are closed for maintenance, please check back later.");
+          setError("Could not connect to the network.");
         }
       });
   }, [mnemonic]);

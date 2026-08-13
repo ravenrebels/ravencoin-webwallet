@@ -8,8 +8,12 @@ export function Loader({ error }: { error?: string }) {
         <h3 className="rebel-headline" style={{ marginBottom: "2rem" }}>Rebel wallet</h3>
         {error ? (
           <div style={{ color: "var(--pico-del-color)", marginTop: "1rem" }}>
-            <h4>Could not load the page</h4>
+            <h4>Connection Error</h4>
             <p>{error}</p>
+            <p style={{ color: "var(--pico-color)", fontSize: "0.9rem", marginTop: "1rem", marginBottom: "2rem" }}>
+              The node for the current network seems to be down or unreachable. 
+              Please check your internet connection, try again later, or select an alternative network below.
+            </p>
             <div style={{ color: "var(--pico-color)" }}>
               <NetworkStatus />
             </div>
