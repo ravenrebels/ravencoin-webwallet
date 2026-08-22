@@ -13,7 +13,7 @@ export function Sign({ assets, wallet }: { assets: IAsset[]; wallet: Wallet }) {
   const uniqueAssets = useUniqueAssets(wallet, assets);
 
   const addressObject = useAddressObject(wallet, selectedAsset);
-  const signature = useSignature(addressObject, text);
+  const signature = useSignature(addressObject, text, wallet.network);
 
   if (uniqueAssets) {
     uniqueAssets.sort(function (a, b) {

@@ -2,20 +2,31 @@ import React from "react";
 import * as RavencoinMessage from "@ravenrebels/ravencoin-message";
 import { IAddressObject } from "./IAddressObject";
 
-export function useSignature(addressObject: IAddressObject | null, text: string) {
+function toMessageNetwork(network: string): "rvn" | "evr" {
+  return network === "evr" ? "evr" : "rvn";
+}
+
+export function useSignature(
+  addressObject: IAddressObject | null,
+  text: string,
+  network: string
+) {
   const [signature, setSignature] = React.useState("");
 
   React.useEffect(() => {
     if (addressObject) {
-      const privateKey = Buffer.from(addressObject.privateKey, "hex");
-      if (!privateKey || !text) {
+      if (!addressObject.privateKey || !text) {
         setSignature("");
       } else {
-        const s = RavencoinMessage.sign(text, privateKey);
+        const s = RavencoinMessage.sign({
+          message: text,
+          privateKey: addressObject.privateKey,
+          network: toMessageNetwork(network),
+        });
         setSignature(s);
       }
     }
-  }, [addressObject, text]);
+  }, [addressObject, text, network]);
 
   if (!addressObject) {
     return "";
